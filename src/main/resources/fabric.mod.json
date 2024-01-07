@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "camoverlay",
+  "version": "${version}",
+
+  "name": "CamOverlay",
+  "description": "Mod for camera control and different overlays",
+  "authors": ["Im_Kel"],
+  "contact": {
+    "sources": "https://github.com/simply-kel/CamOverlay",
+    "homepage": "https://modrinth.com/project/CamOverlay",
+    "issues": "https://github.com/simply-kel/CamOverlay/issues",
+    "email": "me@kelcuprum.ru"
+  },
+
+  "license": "MIT",
+  "icon": "assets/camoverlay/icon.png",
+
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "ru.kelcuprum.camoverlay.CamOverlay"
+    ],
+    "modmenu": [
+      "ru.kelcuprum.camoverlay.screens.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "camoverlay.mixin.json"
+  ],
+
+  "depends": {
+    "fabricloader": "*",
+    "fabric": "*",
+    "minecraft": ">=1.20.2",
+    "alinlib": ">=1.0.1a"
+  },
+  "accessWidener": "camoverlay.accesswidener",
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.modrinth": "https://modrinth.com/project/CamOverlay",
+        "modmenu.donate": "https://kelcuprum.ru/r/don"
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "camoverlay.name": "CamOverlay",
+
+  "camoverlay.binds.enable": "Включить CamOverlay",
+  "camoverlay.binds.enable.overlay": "Включить оверлей",
+  "camoverlay.binds.record": "Включить режим записи",
+  "camoverlay.binds.fov.up": "FOV +",
+  "camoverlay.binds.fov.down": "FOV -",
+  "camoverlay.binds.rotate.right": "Повернуть направо",
+  "camoverlay.binds.rotate.left": "Повернуть налево",
+  "camoverlay.binds.rotate.reset": "Сбросить поворот",
+  "camoverlay.binds.open": "Открыть меню",
+
+  "camoverlay.toast.enable": "Оверлей включен",
+  "camoverlay.toast.disable": "Оверлей отключён",
+  "camoverlay.toast.disable.screen": "Оверлей был отключен из-за конфликтов",
+
+  "camoverlay.options": "CamOverlay > Настройки",
+  "camoverlay.options.enable": "Включить мод",
+  "camoverlay.options.enable.overlay": "Включить оверлей",
+  "camoverlay.options.record_mode": "Режим записи",
+  "camoverlay.options.type": "Тип",
+  "camoverlay.options.type.overlay": "Тип оверлея",
+  "camoverlay.options.grid_number": "Разделите сетку на",
+
+  "camoverlay.options.advanced": "CamOverlay > Расширенные настройки",
+  "camoverlay.options.advanced.disable.hands": "Отклюить руки",
+  "camoverlay.options.advanced.rotate": "Поворот",
+  "camoverlay.options.advanced.fov": "FOV",
+  "camoverlay.options.advanced.enable.set_fov": "Заменять FOV",
+  "camoverlay.options.advanced.world_time": "Показывать время мира",
+
+
+  "camoverlay.camikonshot": "CamikonShot",
+  "camoverlay.camikonshot.rec": "§c\uD83D\uDD34§r ЗАПИСЬ",
+  "camoverlay.camikonshot.photo": "§9📷§r ФОТО РЕЖИМ",
+  "camoverlay.camikonshot.cam": "CamikonShot E8500",
+
+  "camoverlay.klashraick": "KlashRaick",
+  "camoverlay.klashraick.rec": "§c\uD83D\uDD34 ЗАПИСЬ§r",
+  "camoverlay.klashraick.photo": "§9📷 ФОТО РЕЖИМ§r",
+  "camoverlay.klashraick.cam": "Камела 0",
+  "camoverlay.klashraick.height": "Высота - 165",
+
+  "camoverlay.phone": "Телефон",
+  "camoverlay.phone.cam": "Kelmi Note 6",
+
+  "camoverlay.date": "Только дата",
+  "camoverlay.date.format": "MM/dd/yyyy hh:mm:ss",
+
+
+  "camoverlay.overlay.grid_3x3": "Сетка 3x3",
+  "camoverlay.overlay.grid_4x4": "Сетка 4x4",
+  "camoverlay.overlay.grid_custom": "Кастомая сетка",
+
+  "camoverlay.none": "Ничего :/",
+
+  "modmenu.descriptionTranslation.camoverlay": "Мод для управления камерой и различных наложений"
+}
