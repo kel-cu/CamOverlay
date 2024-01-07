@@ -27,7 +27,7 @@
 ![Grid3X3](https://cdn.kelcuprum.ru/camoverlay/overlay/Grid3X3.png)
 ### Сетка 4x4
 ![Grid4X4](https://cdn.kelcuprum.ru/camoverlay/overlay/Grid4X4.png)
-### Сетка 3x3
+### Кастомная сетка
 ![GridCustom](https://cdn.kelcuprum.ru/camoverlay/overlay/GridCustom.png)
 ### Ничего
 ![None](https://cdn.kelcuprum.ru/camoverlay/type/None.png)
