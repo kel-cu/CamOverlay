@@ -24,7 +24,7 @@
   "camoverlay.options.grid_number": "Разделите сетку на",
 
   "camoverlay.options.advanced": "CamOverlay > Расширенные настройки",
-  "camoverlay.options.advanced.disable.hands": "Отклюить руки",
+  "camoverlay.options.advanced.disable.hands": "Отключить руки",
   "camoverlay.options.advanced.rotate": "Поворот",
   "camoverlay.options.advanced.fov": "FOV",
   "camoverlay.options.advanced.enable.set_fov": "Заменять FOV",
