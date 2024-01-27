@@ -27,7 +27,6 @@ import static ru.kelcuprum.camoverlay.CamOverlay.MINECRAFT;
 public class StarScript {
     public static Component dFormat = Component.translatable("camoverlay.date.format");
     public static Starscript ss = new Starscript();
-    static Minecraft mc = Minecraft.getInstance();
 
     public static void init() {
         StandardLib.init(ss);
@@ -52,7 +51,7 @@ public class StarScript {
     }
     // Helpers
     public static String getTime(){
-        String clock = "";
+        String clock;
         String strDateFormat = "MM/dd/yyyy hh:mm:ss";
         if(!dFormat.getString().equalsIgnoreCase("camoverlay.date.format")) strDateFormat = dFormat.getString();
         try {
@@ -63,7 +62,7 @@ public class StarScript {
                 int minutes = (int) ((daytime % 1000)*60/1000);
                 int day = (int) daytime / 1000 / 24;
                 Calendar calendar = new GregorianCalendar();
-                calendar.set(2000, 0, day+1, hours, minutes, 0);
+                calendar.set(2000, Calendar.JANUARY, day+1, hours, minutes, 0);
                 clock = dateFormat.format(calendar.getTimeInMillis());
             } else clock = dateFormat.format(System.currentTimeMillis());
         } catch (IllegalArgumentException ex) {
@@ -96,9 +95,6 @@ public class StarScript {
         return section != null ? section.toString() : null;
     }
 
-    public static Section runSection(Script script) {
-        return runSection(script, new StringBuilder());
-    }
     public static String run(Script script) {
         return run(script, new StringBuilder());
     }

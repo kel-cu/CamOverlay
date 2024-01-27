@@ -21,7 +21,6 @@ public abstract class GameRendererMixin {
             )
     )
     public void renderWorld(float partialTicks, long finishTimeNano, PoseStack poseStack, CallbackInfo ci){
-//        matrix.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(((RollCamera) camera).doABarrelRoll$getRo
         if(!CamOverlay.config.getBoolean("ENABLE", false)) return;
         poseStack.mulPose(Axis.ZP.rotationDegrees(CamOverlay.config.getNumber("ROTATE", 0f).floatValue()));
     }

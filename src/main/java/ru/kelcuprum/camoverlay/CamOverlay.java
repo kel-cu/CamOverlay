@@ -10,8 +10,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.config.Config;
-import ru.kelcuprum.alinlib.config.Localization;
-import ru.kelcuprum.alinlib.gui.toast.AlinaToast;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Level;
@@ -22,7 +20,6 @@ import ru.kelcuprum.camoverlay.screens.ConfigScreen;
 public class CamOverlay implements ClientModInitializer {
     public static Config config = new Config("config/CamOverlay/config.json");
     public static Minecraft MINECRAFT = Minecraft.getInstance();
-    public static Localization localization = new Localization("camoverlay","config/CamOverlay/lang/");
     public static final Logger LOG = LogManager.getLogger("CamOverlay");
     public static void log(String message) { log(message, Level.INFO);}
     public static void log(String message, Level level) { LOG.log(level, "[" + LOG.getName() + "] " + message); }
@@ -30,6 +27,7 @@ public class CamOverlay implements ClientModInitializer {
     public static int lastFOV = 0;
     @Override
     public void onInitializeClient() {
+        log("Hi!");
         config.load();
         StarScript.init();
         lastFOV = config.getNumber("FOV.LAST", 70).intValue();

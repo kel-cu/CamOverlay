@@ -29,7 +29,7 @@ public class AdvancedConfigScreen extends Screen {
                     .setIcon(TOAST_ICON)
                     .setTitle(Component.translatable("camoverlay.name"))
                     .setMessage(Component.translatable("camoverlay.toast.disable.screen"))
-                    .show(minecraft.getToasts());
+                    .show(MINECRAFT.getToasts());
             MINECRAFT.options.fov().set(CamOverlay.lastFOV);
         }
         int x = width/2;

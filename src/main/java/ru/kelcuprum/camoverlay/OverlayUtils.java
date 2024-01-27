@@ -70,6 +70,7 @@ public class OverlayUtils {
             }
         }
         public void renderStatus(GuiGraphics guiGraphics, int width, int height){
+            assert MINECRAFT.player != null;
             switch (this){
                 case CAMIKONSHOT -> {
                     guiGraphics.fill(width - 80, height - 30, width - 25, height - 25, 0x7F000000);
