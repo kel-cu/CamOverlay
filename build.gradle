@@ -16,7 +16,9 @@ repositories {
     mavenCentral()
     maven { url = "https://maven.terraformersmc.com/releases" } // MODMENU
     maven { url = "https://maven.meteordev.org/releases" } // STARSCRIPT
+    maven { url = "https://repo.kelcuprum.ru/snapshots" } // ALINLIB
     maven { url = "https://repo.kelcuprum.ru/releases" } // ALINLIB
+    maven { url = "https://repo.kelcuprum.ru/test" } // ALINLIB
     maven { url = "https://maven.parchmentmc.org" } // MAPPINGS
 }
 
@@ -34,7 +36,7 @@ dependencies {
     // Community
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
     modImplementation "ru.kelcuprum.alinlib:AlinLib:${project.alinlib_version}"
-    include(implementation "meteordevelopment:starscript:0.2.2")
+    include(implementation("meteordevelopment:starscript:0.2.2"))
 
     subprojects.each {
         implementation project(path: ":${it.name}", configuration: 'namedElements')

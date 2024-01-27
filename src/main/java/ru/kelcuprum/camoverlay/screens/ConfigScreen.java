@@ -1,19 +1,18 @@
 package ru.kelcuprum.camoverlay.screens;
 
-import net.minecraft.client.GuiMessage;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import ru.kelcuprum.alinlib.gui.components.buttons.Button;
-import ru.kelcuprum.alinlib.gui.components.buttons.ButtonBoolean;
+import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.components.buttons.ButtonConfigBoolean;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonSprite;
-import ru.kelcuprum.alinlib.gui.components.sliders.SliderInteger;
+import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
+import ru.kelcuprum.alinlib.gui.components.selector.SelectorIntegerButton;
+import ru.kelcuprum.alinlib.gui.components.sliders.SliderConfigInteger;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
-import ru.kelcuprum.alinlib.gui.components.selector.SelectorStringWithIntButton;
 import ru.kelcuprum.camoverlay.CamOverlay;
-import ru.kelcuprum.camoverlay.InterfaceUtils;
+import ru.kelcuprum.camoverlay.OverlayUtils;
 
 import static ru.kelcuprum.camoverlay.CamOverlay.MINECRAFT;
 
@@ -48,25 +47,25 @@ public class ConfigScreen extends Screen {
         int size = 180;
         addRenderableWidget(new TextBox(x-100, 0, 200, 35, title, true));
 
-        addRenderableWidget(new ButtonBoolean(x-90, 40, size, 20, CamOverlay.config, "ENABLE", false, Component.translatable("camoverlay.options.enable")));
-        addRenderableWidget(new ButtonBoolean(x-90, 65, size, 20, CamOverlay.config, "ENABLE.OVERLAY", false, Component.translatable("camoverlay.options.enable.overlay")));
-        addRenderableWidget(new ButtonBoolean(x-90, 90, size, 20, CamOverlay.config, "RECORD_MODE", false, Component.translatable("camoverlay.options.record_mode")));
+        addRenderableWidget(new ButtonConfigBoolean(x-90, 40, size, 20, CamOverlay.config, "ENABLE", false, Component.translatable("camoverlay.options.enable")));
+        addRenderableWidget(new ButtonConfigBoolean(x-90, 65, size, 20, CamOverlay.config, "ENABLE.OVERLAY", false, Component.translatable("camoverlay.options.enable.overlay")));
+        addRenderableWidget(new ButtonConfigBoolean(x-90, 90, size, 20, CamOverlay.config, "RECORD_MODE", false, Component.translatable("camoverlay.options.record_mode")));
         String[] type = {
-                InterfaceUtils.Type.CAMIKONSHOT.name.getString(),
-                InterfaceUtils.Type.KLASHRAICK.name.getString(),
-                InterfaceUtils.Type.PHONE.name.getString(),
-                InterfaceUtils.Type.DATE.name.getString(),
-                InterfaceUtils.Type.NONE.name.getString(),
+                OverlayUtils.Type.CAMIKONSHOT.name.getString(),
+                OverlayUtils.Type.KLASHRAICK.name.getString(),
+                OverlayUtils.Type.PHONE.name.getString(),
+                OverlayUtils.Type.DATE.name.getString(),
+                OverlayUtils.Type.NONE.name.getString(),
         };
-        addRenderableWidget(new SelectorStringWithIntButton(x-90, 115, size, 20, type, CamOverlay.config, "TYPE", 0, Component.translatable("camoverlay.options.type")));
+        addRenderableWidget(new SelectorIntegerButton(x-90, 115, size, 20, type, CamOverlay.config, "TYPE", 0, Component.translatable("camoverlay.options.type")));
         String[] overlay = {
-                InterfaceUtils.Overlay.GRID_3x3.name.getString(),
-                InterfaceUtils.Overlay.GRID_4x4.name.getString(),
-                InterfaceUtils.Overlay.GRID_CUSTOM.name.getString(),
-                InterfaceUtils.Overlay.NONE.name.getString(),
+                OverlayUtils.Overlay.GRID_3x3.name.getString(),
+                OverlayUtils.Overlay.GRID_4x4.name.getString(),
+                OverlayUtils.Overlay.GRID_CUSTOM.name.getString(),
+                OverlayUtils.Overlay.NONE.name.getString(),
         };
-        addRenderableWidget(new SelectorStringWithIntButton(x-90, 140, size, 20, overlay, CamOverlay.config, "TYPE.OVERLAY", 0, Component.translatable("camoverlay.options.type.overlay")));
-        addRenderableWidget(new SliderInteger(x-90, 165, size, 20, CamOverlay.config, "GRID_NUMBER", 2, 2, 20, Component.translatable("camoverlay.options.grid_number")));
+        addRenderableWidget(new SelectorIntegerButton(x-90, 140, size, 20, overlay, CamOverlay.config, "TYPE.OVERLAY", 0, Component.translatable("camoverlay.options.type.overlay")));
+        addRenderableWidget(new SliderConfigInteger(x-90, 165, size, 20, CamOverlay.config, "GRID_NUMBER", 2, 2, 20, Component.translatable("camoverlay.options.grid_number")));
 
 
         addRenderableWidget(new Button(x-90, height-30, size-25, 20, CommonComponents.GUI_BACK, (s) -> {
@@ -74,7 +73,7 @@ public class ConfigScreen extends Screen {
             this.minecraft.setScreen(this.parent);
         }));
 
-        addRenderableWidget(new ButtonSprite(x+70, height-30, 20, 20, new ResourceLocation("camoverlay", "textures/gui/widget/buttons/advanced.png"), Component.translatable("camoverlay.options.advanced"), (s) ->{
+        addRenderableWidget(new ButtonSprite(x+70, height-30, 20, 20, InterfaceUtils.Icons.OPTIONS, Component.translatable("camoverlay.options.advanced"), (s) ->{
             assert this.minecraft != null;
             this.minecraft.setScreen(new AdvancedConfigScreen(this));
         }));

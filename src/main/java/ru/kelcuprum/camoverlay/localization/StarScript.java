@@ -57,7 +57,7 @@ public class StarScript {
         if(!dFormat.getString().equalsIgnoreCase("camoverlay.date.format")) strDateFormat = dFormat.getString();
         try {
             DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
-            if(CamOverlay.config.getBoolean("WORLD_TIME", false)){
+            if(CamOverlay.config.getBoolean("WORLD_TIME", false) && MINECRAFT.level != null){
                 long daytime = MINECRAFT.level.getDayTime()+6000;
                 int hours=(int) (daytime / 1000)%24;
                 int minutes = (int) ((daytime % 1000)*60/1000);

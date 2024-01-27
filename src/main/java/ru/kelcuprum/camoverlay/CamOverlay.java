@@ -15,6 +15,7 @@ import ru.kelcuprum.alinlib.gui.toast.AlinaToast;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Level;
+import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 import ru.kelcuprum.camoverlay.localization.StarScript;
 import ru.kelcuprum.camoverlay.screens.ConfigScreen;
 
@@ -25,7 +26,7 @@ public class CamOverlay implements ClientModInitializer {
     public static final Logger LOG = LogManager.getLogger("CamOverlay");
     public static void log(String message) { log(message, Level.INFO);}
     public static void log(String message, Level level) { LOG.log(level, "[" + LOG.getName() + "] " + message); }
-    public static ResourceLocation TOAST_ICON = new ResourceLocation("camoverlay", "icon_toast.png");
+    public static ResourceLocation TOAST_ICON = new ResourceLocation("camoverlay", "textures/gui/widget/toast/icon.png");
     public static int lastFOV = 0;
     @Override
     public void onInitializeClient() {
@@ -106,7 +107,12 @@ public class CamOverlay implements ClientModInitializer {
             while (enableModBind.consumeClick()) {
                 boolean state = !config.getBoolean("ENABLE", false);
                 config.setBoolean("ENABLE", state);
-                MINECRAFT.getToasts().addToast(new AlinaToast(Component.translatable("camoverlay.name"), Component.translatable("camoverlay.toast."+(state ? "enable" : "disable")), TOAST_ICON, state ? AlinaToast.Type.INFO : AlinaToast.Type.ERROR));
+                new ToastBuilder()
+                        .setIcon(TOAST_ICON)
+                        .setTitle(Component.translatable("camoverlay.name"))
+                        .setMessage(Component.translatable("camoverlay.toast."+(state ? "enable" : "disable")))
+                        .setType(state ? ToastBuilder.Type.INFO : ToastBuilder.Type.ERROR)
+                        .show(MINECRAFT.getToasts());
                 if(state){
                     // Замена FOV
                     lastFOV = MINECRAFT.options.fov().get();
