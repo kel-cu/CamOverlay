@@ -2,7 +2,7 @@
 Мод для управления камерой и различных наложений
 <hr>
 
-[![alinlib](https://kelcuprum.ru/ass/budge/alinlib/cozy_vector.svg)](/simply-kel/alinlib)
+[![alinlib](https://kelcuprum.ru/ass/budge/alinlib/requires/cozy_vector.svg)](/simply-kel/alinlib)
 ![fabric](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/fabric_vector.svg)
 ![quilt](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/supported/quilt_vector.svg)
 

@@ -1,4 +1,4 @@
-package ru.kelcuprum.camoverlay.screens;
+package ru.kelcuprum.camoverlay.screens.config;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;

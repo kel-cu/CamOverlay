@@ -11,10 +11,10 @@ import meteordevelopment.starscript.utils.StarscriptError;
 import meteordevelopment.starscript.value.Value;
 import meteordevelopment.starscript.value.ValueMap;
 import net.minecraft.SharedConstants;
-import net.minecraft.client.Minecraft;
 
 import net.minecraft.network.chat.Component;
 import org.apache.logging.log4j.Level;
+import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.camoverlay.CamOverlay;
 
 import java.text.DateFormat;
@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import static java.lang.Double.parseDouble;
 import static ru.kelcuprum.camoverlay.CamOverlay.MINECRAFT;
 
 public class StarScript {
@@ -34,11 +35,28 @@ public class StarScript {
         // General
         ss.set("minecraft", new ValueMap()
                 .set("version", SharedConstants.getCurrentVersion().getName())
-                .set("loader", Minecraft.getInstance().getVersionType())
+                .set("loader", MINECRAFT.getVersionType())
+                .set("fps", () -> Value.number(MINECRAFT.getFps()))
+                .set("player", new ValueMap()
+                        .set("name", () -> Value.string(MINECRAFT.getUser().getName()))
+                        .set("position", new ValueMap()
+                                .set("x", () -> Value.number(MINECRAFT.player == null ? 0 : getPosRound(MINECRAFT.player.getX())))
+                                .set("y", () -> Value.number(MINECRAFT.player == null ? 0 : getPosRound(MINECRAFT.player.getY())))
+                                .set("z", () -> Value.number(MINECRAFT.player == null ? 0 : getPosRound(MINECRAFT.player.getZ())))
+                        )
+                )
+                .set("world", new ValueMap()
+                        .set("time", () -> Value.string(getTime(true)))
+                        .set("name", () -> Value.string(MINECRAFT.levelRenderer == null ? "-" : MINECRAFT.levelRenderer.getName()))
+                )
         );
         ss.set("overlay", new ValueMap()
-                .set("time", () -> Value.string(getTime()))
+                .set("time", () -> Value.string(getTime(false)))
         );
+    }
+    public static double getPosRound(double pos){
+        String posS = Localization.getRounding(pos);
+        return parseDouble(posS);
     }
     public static String parseText(String text){
         String parsedText = text;
@@ -50,13 +68,13 @@ public class StarScript {
         return parsedText;
     }
     // Helpers
-    public static String getTime(){
+    public static String getTime(boolean isWorld){
         String clock;
         String strDateFormat = "MM/dd/yyyy hh:mm:ss";
         if(!dFormat.getString().equalsIgnoreCase("camoverlay.date.format")) strDateFormat = dFormat.getString();
         try {
             DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
-            if(CamOverlay.config.getBoolean("WORLD_TIME", false) && MINECRAFT.level != null){
+            if(isWorld && MINECRAFT.level != null){
                 long daytime = MINECRAFT.level.getDayTime()+6000;
                 int hours=(int) (daytime / 1000)%24;
                 int minutes = (int) ((daytime % 1000)*60/1000);
