@@ -52,7 +52,7 @@ public class AdvancedConfigScreen extends Screen {
     @Override
     public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         int x = width/2;
-        guiGraphics.fill(x-100, 0, x+100, height, 0x7F000000);
         super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
+        guiGraphics.fill(x-100, 0, x+100, height, 0x7F000000);
     }
 }

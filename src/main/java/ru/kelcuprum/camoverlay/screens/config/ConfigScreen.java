@@ -9,6 +9,7 @@ import ru.kelcuprum.alinlib.gui.components.buttons.ButtonConfigBoolean;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonSprite;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
 import ru.kelcuprum.alinlib.gui.components.selector.SelectorIntegerButton;
+import ru.kelcuprum.alinlib.gui.components.selector.SelectorStringButton;
 import ru.kelcuprum.alinlib.gui.components.sliders.SliderConfigInteger;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 import ru.kelcuprum.camoverlay.CamOverlay;
@@ -62,10 +63,19 @@ public class ConfigScreen extends Screen {
                 OverlayUtils.Overlay.GRID_3x3.name.getString(),
                 OverlayUtils.Overlay.GRID_4x4.name.getString(),
                 OverlayUtils.Overlay.GRID_CUSTOM.name.getString(),
+                OverlayUtils.Overlay.GOLDEN_RATIO.name.getString(),
+                OverlayUtils.Overlay.VERTICAL_GOLDEN_RATIO.name.getString(),
                 OverlayUtils.Overlay.NONE.name.getString(),
+        };
+        String[] golden_ratio_rotate = {
+                "0",
+                "90",
+                "180",
+                "270"
         };
         addRenderableWidget(new SelectorIntegerButton(x-90, 140, size, 20, overlay, CamOverlay.config, "TYPE.OVERLAY", 0, Component.translatable("camoverlay.options.type.overlay")));
         addRenderableWidget(new SliderConfigInteger(x-90, 165, size, 20, CamOverlay.config, "GRID_NUMBER", 2, 2, 20, Component.translatable("camoverlay.options.grid_number")));
+        addRenderableWidget(new SelectorStringButton(x-90, 190, size, 20, golden_ratio_rotate, CamOverlay.config, "GOLDEN_RATIO.ROTATE", "0", Component.translatable("camoverlay.options.type.overlay")));
 
 
         addRenderableWidget(new Button(x-90, height-30, size-25, 20, CommonComponents.GUI_BACK, (s) -> {
@@ -82,7 +92,7 @@ public class ConfigScreen extends Screen {
     @Override
     public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         int x = width/2;
-        guiGraphics.fill(x-100, 0, x+100, height, 0x7F000000);
         super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
+        guiGraphics.fill(x-100, 0, x+100, height, 0x7F000000);
     }
 }

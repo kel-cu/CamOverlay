@@ -19,11 +19,11 @@ import ru.kelcuprum.camoverlay.CamOverlay;
 @Mixin(ItemInHandRenderer.class)
 public class ItemInHandRendererMixin {
 
-    @Inject(method = "renderItem", at = @At("HEAD"), cancellable = true)
-    public void renderItem(LivingEntity entity, ItemStack itemStack, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource buffer, int seed, CallbackInfo ci) {
-        if (!CamOverlay.config.getBoolean("ENABLE", false)) return;
-        if (CamOverlay.config.getBoolean("DISABLE.HANDS", true)) ci.cancel();
-    }
+//    @Inject(method = "renderItem", at = @At("HEAD"), cancellable = true)
+//    public void renderItem(LivingEntity entity, ItemStack itemStack, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource buffer, int seed, CallbackInfo ci) {
+//        if (!CamOverlay.config.getBoolean("ENABLE", false)) return;
+//        if (CamOverlay.config.getBoolean("DISABLE.HANDS", true)) ci.cancel();
+//    }
 
     @Inject(method = "renderMapHand", at = @At("HEAD"), cancellable = true)
     public void renderItem(PoseStack poseStack, MultiBufferSource buffer, int combinedLight, HumanoidArm side, CallbackInfo ci) {

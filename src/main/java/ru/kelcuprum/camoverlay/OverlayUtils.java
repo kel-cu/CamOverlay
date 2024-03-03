@@ -1,8 +1,12 @@
 package ru.kelcuprum.camoverlay;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import ru.kelcuprum.camoverlay.localization.StarScript;
 
 import static ru.kelcuprum.camoverlay.CamOverlay.MINECRAFT;
@@ -22,6 +26,8 @@ public class OverlayUtils {
             case 0 -> Overlay.GRID_3x3;
             case 1 -> Overlay.GRID_4x4;
             case 2 -> Overlay.GRID_CUSTOM;
+            case 3 -> Overlay.GOLDEN_RATIO;
+            case 4 -> Overlay.VERTICAL_GOLDEN_RATIO;
             default -> Overlay.NONE;
         };
     }
@@ -143,6 +149,8 @@ public class OverlayUtils {
         GRID_3x3(Component.translatable("camoverlay.overlay.grid_3x3")),
         GRID_4x4(Component.translatable("camoverlay.overlay.grid_4x4")),
         GRID_CUSTOM(Component.translatable("camoverlay.overlay.grid_custom")),
+        GOLDEN_RATIO(Component.translatable("camoverlay.overlay.golden_ratio")),
+        VERTICAL_GOLDEN_RATIO(Component.translatable("camoverlay.overlay.vertical_golden_ratio")),
         NONE(Component.translatable("camoverlay.none"));
         public final Component name;
         Overlay(Component name){
@@ -184,6 +192,18 @@ public class OverlayUtils {
                     for(int i = 0;i<steps;i++){
                         guiGraphics.fill(0, y+(y*i), width, y+(y*i)+1, 0x7FFFFFFF);
                     }
+                }
+                case GOLDEN_RATIO -> {
+                    ResourceLocation texture = new ResourceLocation("camoverlay", "textures/overlays/golden_ratio/gr_"+CamOverlay.config.getString("GOLDEN_RATIO.ROTATE", "0")+".png");
+                    RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.ONE_MINUS_DST_COLOR, GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+                    guiGraphics.blit(texture, 0, 0, width, height, 0f, 0f, 1280, 720, 1280, 720);
+                    RenderSystem.defaultBlendFunc();
+                }
+                case VERTICAL_GOLDEN_RATIO -> {
+                    ResourceLocation texture = new ResourceLocation("camoverlay", "textures/overlays/golden_ratio/grv_"+CamOverlay.config.getString("GOLDEN_RATIO.ROTATE", "0")+".png");
+                    RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.ONE_MINUS_DST_COLOR, GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+                    guiGraphics.blit(texture, 0, 0, width, height, 0f, 0f, 1280, 720, 1280, 720);
+                    RenderSystem.defaultBlendFunc();
                 }
                 default -> {}
             }
