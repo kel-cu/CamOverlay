@@ -15,15 +15,16 @@
   "camoverlay.toast.disable": "Overlay disabled",
   "camoverlay.toast.disable.screen": "The overlay was disabled due to conflicts",
 
-  "camoverlay.options": "CamOverlay > Options",
+  "camoverlay.options": "Options",
   "camoverlay.options.enable": "Enable mod",
   "camoverlay.options.enable.overlay": "Enable overlay",
   "camoverlay.options.record_mode": "Record mode",
   "camoverlay.options.type": "Type",
   "camoverlay.options.type.overlay": "Overlay type",
   "camoverlay.options.grid_number": "Divide the grid into",
+  "camoverlay.options.golden_ratio.rotate": "Golden Ratio rotate",
 
-  "camoverlay.options.advanced": "CamOverlay > Advanced options",
+  "camoverlay.options.advanced": "Advanced options",
   "camoverlay.options.advanced.disable.hands": "Disable hands",
   "camoverlay.options.advanced.rotate": "Rotate",
   "camoverlay.options.advanced.fov": "FOV",
@@ -52,6 +53,8 @@
   "camoverlay.overlay.grid_3x3": "Grid 3x3",
   "camoverlay.overlay.grid_4x4": "Grid 4x4",
   "camoverlay.overlay.grid_custom": "Custom grid",
+  "camoverlay.overlay.golden_ratio": "Golden Ratio",
+  "camoverlay.overlay.vertical_golden_ratio": "Vertical Golden Ratio",
 
   "camoverlay.none": "None :/",
 

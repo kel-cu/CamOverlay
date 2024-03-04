@@ -172,7 +172,7 @@ public class CamOverlay implements ClientModInitializer {
                 }
             }
             while (menuBind.consumeClick()) {
-                MINECRAFT.setScreen(new ConfigScreen(MINECRAFT.screen));
+                MINECRAFT.setScreen(ConfigScreen.build(MINECRAFT.screen));
             }
         });
     }

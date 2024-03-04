@@ -15,15 +15,16 @@
   "camoverlay.toast.disable": "Оверлей отключён",
   "camoverlay.toast.disable.screen": "Оверлей был отключен из-за конфликтов",
 
-  "camoverlay.options": "CamOverlay > Настройки",
+  "camoverlay.options": "Настройки",
   "camoverlay.options.enable": "Включить мод",
   "camoverlay.options.enable.overlay": "Включить оверлей",
   "camoverlay.options.record_mode": "Режим записи",
   "camoverlay.options.type": "Тип",
   "camoverlay.options.type.overlay": "Тип оверлея",
   "camoverlay.options.grid_number": "Разделите сетку на",
+  "camoverlay.options.golden_ratio.rotate": "Поворот золотой сечении",
 
-  "camoverlay.options.advanced": "CamOverlay > Расширенные настройки",
+  "camoverlay.options.advanced": "Расширенные настройки",
   "camoverlay.options.advanced.disable.hands": "Отключить руки",
   "camoverlay.options.advanced.rotate": "Поворот",
   "camoverlay.options.advanced.fov": "FOV",
@@ -52,6 +53,8 @@
   "camoverlay.overlay.grid_3x3": "Сетка 3x3",
   "camoverlay.overlay.grid_4x4": "Сетка 4x4",
   "camoverlay.overlay.grid_custom": "Кастомая сетка",
+  "camoverlay.overlay.golden_ratio": "Золотое сечение",
+  "camoverlay.overlay.vertical_golden_ratio": "Верт. золотое сечение",
 
   "camoverlay.none": "Ничего :/",
 

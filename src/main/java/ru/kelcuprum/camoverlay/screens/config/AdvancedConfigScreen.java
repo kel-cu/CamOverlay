@@ -1,28 +1,29 @@
 package ru.kelcuprum.camoverlay.screens.config;
 
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonConfigBoolean;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
 import ru.kelcuprum.alinlib.gui.components.sliders.SliderConfigInteger;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
+import ru.kelcuprum.alinlib.gui.screens.ConfigScreenBuilder;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 import ru.kelcuprum.camoverlay.CamOverlay;
 
 import static ru.kelcuprum.camoverlay.CamOverlay.MINECRAFT;
 import static ru.kelcuprum.camoverlay.CamOverlay.TOAST_ICON;
 
-public class AdvancedConfigScreen extends Screen {
-    private final Screen parent;
-    public AdvancedConfigScreen(Screen parent) {
-        super(Component.translatable("camoverlay.options.advanced"));
-        this.parent = parent;
-    }
-
-    @Override
-    protected void init() {
+public class AdvancedConfigScreen{
+    private static final InterfaceUtils.DesignType dType = InterfaceUtils.DesignType.FLAT;
+    public static Screen build(Screen parent) {
+        ConfigScreenBuilder builder = new ConfigScreenBuilder(parent, Component.translatable("camoverlay.name"), dType)
+                .addPanelWidget(new Button(10, 40, 100, 20, dType, Component.translatable("camoverlay.options"), (s) -> {
+                    MINECRAFT.setScreen(ConfigScreen.build(parent));
+                }))
+                .addPanelWidget(new Button(10, 65, 100, 20, dType, Component.translatable("camoverlay.options.advanced"), (s) -> {
+                    MINECRAFT.setScreen(AdvancedConfigScreen.build(parent));
+                }));
         if(CamOverlay.config.getBoolean("ENABLE", false)){
             CamOverlay.config.setBoolean("ENABLE", false);
             new ToastBuilder()
@@ -32,27 +33,14 @@ public class AdvancedConfigScreen extends Screen {
                     .show(MINECRAFT.getToasts());
             MINECRAFT.options.fov().set(CamOverlay.lastFOV);
         }
-        int x = width/2;
-        int size = 180;
-        addRenderableWidget(new TextBox(x-100, 0, 200, 35, title, true));
+        builder.addWidget(new TextBox(140, 5, Component.translatable("camoverlay.options.advanced"), true));
 
-        addRenderableWidget(new ButtonConfigBoolean(x-90, 40, size, 20, CamOverlay.config, "DISABLE.HANDS", true, Component.translatable("camoverlay.options.advanced.disable.hands")));
-        addRenderableWidget(new SliderConfigInteger(x-90, 65, size, 20, CamOverlay.config, "ROTATE", 0, -180, 180, Component.translatable("camoverlay.options.advanced.rotate")));
-        addRenderableWidget(new SliderConfigInteger(x-90, 90, size, 20, CamOverlay.config, "FOV", 0, 30, 110, Component.translatable("camoverlay.options.advanced.fov")));
-        addRenderableWidget(new ButtonConfigBoolean(x-90, 115, size, 20, CamOverlay.config, "ENABLE.SET_FOV", true, Component.translatable("camoverlay.options.advanced.enable.set_fov")));
-        addRenderableWidget(new ButtonConfigBoolean(x-90, 140, size, 20, CamOverlay.config, "WORLD_TIME", false, Component.translatable("camoverlay.options.advanced.world_time")));
+        builder.addWidget(new ButtonConfigBoolean(140, 30, dType, CamOverlay.config, "DISABLE.HANDS", true, Component.translatable("camoverlay.options.advanced.disable.hands")));
+        builder.addWidget(new SliderConfigInteger(140, 55, dType, CamOverlay.config, "ROTATE", 0, -180, 180, Component.translatable("camoverlay.options.advanced.rotate")));
+        builder.addWidget(new SliderConfigInteger(140, 80, dType, CamOverlay.config, "FOV", 0, 30, 110, Component.translatable("camoverlay.options.advanced.fov")));
+        builder.addWidget(new ButtonConfigBoolean(140, 105, dType, CamOverlay.config, "ENABLE.SET_FOV", true, Component.translatable("camoverlay.options.advanced.enable.set_fov")));
+        builder.addWidget(new ButtonConfigBoolean(140, 130, dType, CamOverlay.config, "WORLD_TIME", false, Component.translatable("camoverlay.options.advanced.world_time")));
 
-
-        addRenderableWidget(new Button(x-90, height-30, size, 20, CommonComponents.GUI_BACK, (s) -> {
-            assert this.minecraft != null;
-            this.minecraft.setScreen(this.parent);
-        }));
-    }
-
-    @Override
-    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        int x = width/2;
-        super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
-        guiGraphics.fill(x-100, 0, x+100, height, 0x7F000000);
+        return builder.build();
     }
 }

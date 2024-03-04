@@ -1,56 +1,48 @@
 package ru.kelcuprum.camoverlay.screens.config;
 
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonConfigBoolean;
-import ru.kelcuprum.alinlib.gui.components.buttons.ButtonSprite;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
 import ru.kelcuprum.alinlib.gui.components.selector.SelectorIntegerButton;
 import ru.kelcuprum.alinlib.gui.components.selector.SelectorStringButton;
 import ru.kelcuprum.alinlib.gui.components.sliders.SliderConfigInteger;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
+import ru.kelcuprum.alinlib.gui.screens.ConfigScreenBuilder;
 import ru.kelcuprum.camoverlay.CamOverlay;
 import ru.kelcuprum.camoverlay.OverlayUtils;
 
 import static ru.kelcuprum.camoverlay.CamOverlay.MINECRAFT;
 
-public class ConfigScreen extends Screen {
-    private final Screen parent;
-    public ConfigScreen(Screen parent) {
-        super(Component.translatable("camoverlay.options"));
-        this.parent = parent;
-    }
-    private Boolean lastEnable = CamOverlay.config.getBoolean("ENABLE", false);
+public class ConfigScreen {
+    private static final InterfaceUtils.DesignType dType = InterfaceUtils.DesignType.FLAT;
+    private static Boolean lastEnable = CamOverlay.config.getBoolean("ENABLE", false);
 
-    @Override
-    public void tick() {
-        if(lastEnable != CamOverlay.config.getBoolean("ENABLE", false)){
+    public static Screen build(Screen parent) {
+        ConfigScreenBuilder builder = new ConfigScreenBuilder(parent, Component.translatable("camoverlay.name"), dType)
+                .setOnTick((d) -> {
+                            if(lastEnable != CamOverlay.config.getBoolean("ENABLE", false)){
             lastEnable = CamOverlay.config.getBoolean("ENABLE", false);
-            if(lastEnable){
-                // Замена FOV
-                CamOverlay.lastFOV = MINECRAFT.options.fov().get();
-                CamOverlay.config.setNumber("FOV.LAST", CamOverlay.lastFOV);
-                if(CamOverlay.config.getBoolean("ENABLE.SET_FOV", true)) MINECRAFT.options.fov().set(CamOverlay.config.getNumber("FOV", 30).intValue());
-            } else {
-                // Замена FOV
-                MINECRAFT.options.fov().set(CamOverlay.lastFOV);
-            }
-        }
-        super.tick();
-    }
+                                if (lastEnable) {
+                                    // Замена FOV
+                                    CamOverlay.lastFOV = MINECRAFT.options.fov().get();
+                                    CamOverlay.config.setNumber("FOV.LAST", CamOverlay.lastFOV);
+                                    if (CamOverlay.config.getBoolean("ENABLE.SET_FOV", true))
+                                        MINECRAFT.options.fov().set(CamOverlay.config.getNumber("FOV", 30).intValue());
+                                } else {
+                                    // Замена FOV
+                                    MINECRAFT.options.fov().set(CamOverlay.lastFOV);
+                                }
+                            }
+                })
+                .addPanelWidget(new Button(10, 40, 100, 20, dType, Component.translatable("camoverlay.options"), (s) -> MINECRAFT.setScreen(ConfigScreen.build(parent))))
+                .addPanelWidget(new Button(10, 65, 100, 20, dType, Component.translatable("camoverlay.options.advanced"), (s) -> MINECRAFT.setScreen(AdvancedConfigScreen.build(parent))));
+        builder.addWidget(new TextBox(140, 5, Component.translatable("camoverlay.options"), true));
 
-    @Override
-    protected void init() {
-        int x = width/2;
-        int size = 180;
-        addRenderableWidget(new TextBox(x-100, 0, 200, 35, title, true));
-
-        addRenderableWidget(new ButtonConfigBoolean(x-90, 40, size, 20, CamOverlay.config, "ENABLE", false, Component.translatable("camoverlay.options.enable")));
-        addRenderableWidget(new ButtonConfigBoolean(x-90, 65, size, 20, CamOverlay.config, "ENABLE.OVERLAY", false, Component.translatable("camoverlay.options.enable.overlay")));
-        addRenderableWidget(new ButtonConfigBoolean(x-90, 90, size, 20, CamOverlay.config, "RECORD_MODE", false, Component.translatable("camoverlay.options.record_mode")));
+        builder.addWidget(new ButtonConfigBoolean(140, 30, dType, CamOverlay.config, "ENABLE", false, Component.translatable("camoverlay.options.enable")));
+        builder.addWidget(new ButtonConfigBoolean(140, 55, dType, CamOverlay.config, "ENABLE.OVERLAY", false, Component.translatable("camoverlay.options.enable.overlay")));
+        builder.addWidget(new ButtonConfigBoolean(140, 80, dType, CamOverlay.config, "RECORD_MODE", false, Component.translatable("camoverlay.options.record_mode")));
         String[] type = {
                 OverlayUtils.Type.CAMIKONSHOT.name.getString(),
                 OverlayUtils.Type.KLASHRAICK.name.getString(),
@@ -58,7 +50,7 @@ public class ConfigScreen extends Screen {
                 OverlayUtils.Type.DATE.name.getString(),
                 OverlayUtils.Type.NONE.name.getString(),
         };
-        addRenderableWidget(new SelectorIntegerButton(x-90, 115, size, 20, type, CamOverlay.config, "TYPE", 0, Component.translatable("camoverlay.options.type")));
+        builder.addWidget(new SelectorIntegerButton(140, 105, dType, type, CamOverlay.config, "TYPE", 0, Component.translatable("camoverlay.options.type")));
         String[] overlay = {
                 OverlayUtils.Overlay.GRID_3x3.name.getString(),
                 OverlayUtils.Overlay.GRID_4x4.name.getString(),
@@ -73,26 +65,10 @@ public class ConfigScreen extends Screen {
                 "180",
                 "270"
         };
-        addRenderableWidget(new SelectorIntegerButton(x-90, 140, size, 20, overlay, CamOverlay.config, "TYPE.OVERLAY", 0, Component.translatable("camoverlay.options.type.overlay")));
-        addRenderableWidget(new SliderConfigInteger(x-90, 165, size, 20, CamOverlay.config, "GRID_NUMBER", 2, 2, 20, Component.translatable("camoverlay.options.grid_number")));
-        addRenderableWidget(new SelectorStringButton(x-90, 190, size, 20, golden_ratio_rotate, CamOverlay.config, "GOLDEN_RATIO.ROTATE", "0", Component.translatable("camoverlay.options.type.overlay")));
+        builder.addWidget(new SelectorIntegerButton(140, 130, dType, overlay, CamOverlay.config, "TYPE.OVERLAY", 0, Component.translatable("camoverlay.options.type.overlay")));
+        builder.addWidget(new SliderConfigInteger(140, 155, dType, CamOverlay.config, "GRID_NUMBER", 2, 2, 20, Component.translatable("camoverlay.options.grid_number")));
+        builder.addWidget(new SelectorStringButton(140, 180, dType, golden_ratio_rotate, CamOverlay.config, "GOLDEN_RATIO.ROTATE", "0", Component.translatable("camoverlay.options.golden_ratio.rotate")));
 
-
-        addRenderableWidget(new Button(x-90, height-30, size-25, 20, CommonComponents.GUI_BACK, (s) -> {
-            assert this.minecraft != null;
-            this.minecraft.setScreen(this.parent);
-        }));
-
-        addRenderableWidget(new ButtonSprite(x+70, height-30, 20, 20, InterfaceUtils.Icons.OPTIONS, Component.translatable("camoverlay.options.advanced"), (s) ->{
-            assert this.minecraft != null;
-            this.minecraft.setScreen(new AdvancedConfigScreen(this));
-        }));
-    }
-
-    @Override
-    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        int x = width/2;
-        super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
-        guiGraphics.fill(x-100, 0, x+100, height, 0x7F000000);
+        return builder.build();
     }
 }
