@@ -22,7 +22,7 @@
   "camoverlay.options.type": "Тип",
   "camoverlay.options.type.overlay": "Тип оверлея",
   "camoverlay.options.grid_number": "Разделите сетку на",
-  "camoverlay.options.golden_ratio.rotate": "Поворот золотой сечении",
+  "camoverlay.options.golden_ratio.rotate": "Поворот золотого сечения",
 
   "camoverlay.options.advanced": "Расширенные настройки",
   "camoverlay.options.advanced.disable.hands": "Отключить руки",
