@@ -6,7 +6,8 @@
   "client": [
     "GameRendererMixin",
     "GuiMixin",
-    "ItemInHandRendererMixin"
+    "ItemInHandRendererMixin",
+    "MouseMixin"
   ],
   "injectors": {
     "defaultRequire": 1

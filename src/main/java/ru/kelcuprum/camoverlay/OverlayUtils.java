@@ -7,6 +7,7 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.camoverlay.localization.StarScript;
 
 import static ru.kelcuprum.camoverlay.CamOverlay.MINECRAFT;
@@ -108,7 +109,7 @@ public class OverlayUtils {
                 case CAMIKONSHOT -> {
                     Component rec = Component.translatable("camoverlay.camikonshot." + (CamOverlay.config.getBoolean("RECORD_MODE", true) ? "rec" : "photo"));
                     Component cam = Component.translatable("camoverlay.camikonshot.cam");
-                    Component info = Component.literal(String.format("Frame: %sx%s  FPS: %s  FOV: %s", minecraft.getWindow().getWidth(), minecraft.getWindow().getHeight(), minecraft.getFps(), minecraft.options.fov().get()));
+                    Component info = Component.literal(String.format("Frame: %sx%s  FPS: %s  FOV: %s", minecraft.getWindow().getWidth(), minecraft.getWindow().getHeight(), minecraft.getFps(), Localization.getRounding(CamOverlay.getFov(minecraft.options.fov().get()), true)));
                     Component rotate = Component.literal(String.format("%s°", CamOverlay.config.getNumber("ROTATE", 0F).floatValue()));
                     // CENTER BOTTOM
                     guiGraphics.drawCenteredString(minecraft.font, info, width / 2, height - 20 - minecraft.font.lineHeight, 0xFFFFFFFF);

@@ -8,6 +8,7 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.config.Config;
 import org.apache.logging.log4j.LogManager;
@@ -21,19 +22,27 @@ import ru.kelcuprum.camoverlay.screens.config.ConfigScreen;
 public class CamOverlay implements ClientModInitializer {
     public static Config config = new Config("config/CamOverlay/config.json");
     public static Minecraft MINECRAFT = Minecraft.getInstance();
-    public static Localization localization = new Localization("camoverlay", "config/CamOverlay/lang");
     public static final Logger LOG = LogManager.getLogger("CamOverlay");
     public static void log(String message) { log(message, Level.INFO);}
     public static void log(String message, Level level) { LOG.log(level, "[" + LOG.getName() + "] " + message); }
     public static ResourceLocation TOAST_ICON = new ResourceLocation("camoverlay", "textures/gui/widget/toast/icon.png");
-    public static int lastFOV = 0;
     @Override
     public void onInitializeClient() {
         log("Hi!");
         config.load();
         StarScript.init();
-        lastFOV = config.getNumber("FOV.LAST", 70).intValue();
         registerBinds();
+    }
+    public static Double getFov(double fov){
+        return config.getBoolean("ENABLE.SET_FOV", true) && config.getBoolean("ENABLE", true) ? config.getNumber("FOV", 30).doubleValue() : fov;
+    }
+    public static void changeFov(double mouseScroll, boolean isMouse){
+        if(isMouse && !config.getBoolean("ENABLE.SCROLL_FOV", true)) return;
+        if(!config.getBoolean("ENABLE.SET_FOV", true) && !config.getBoolean("ENABLE", true)) return;
+        double fov = config.getNumber("FOV", 30).doubleValue();
+        if(mouseScroll >= 0) fov += isMouse ? -1 : 1;
+        else if(mouseScroll <= 0) fov -= isMouse ? -1 : 1;
+        config.setNumber("FOV", Mth.clamp(fov, 1, 110));
     }
     public void registerBinds(){
         // enable
@@ -113,15 +122,6 @@ public class CamOverlay implements ClientModInitializer {
                         .setMessage(Component.translatable("camoverlay.toast."+(state ? "enable" : "disable")))
                         .setType(state ? ToastBuilder.Type.INFO : ToastBuilder.Type.ERROR)
                         .show(MINECRAFT.getToasts());
-                if(state){
-                    // Замена FOV
-                    lastFOV = MINECRAFT.options.fov().get();
-                    config.setNumber("FOV.LAST", lastFOV);
-                    if(config.getBoolean("ENABLE.SET_FOV", true)) MINECRAFT.options.fov().set(config.getNumber("FOV", 30).intValue());
-                } else {
-                    // Замена FOV
-                    MINECRAFT.options.fov().set(lastFOV);
-                }
             }
             while (enableOverlayBind.consumeClick()) {
                 if(config.getBoolean("ENABLE", false)){
@@ -136,20 +136,10 @@ public class CamOverlay implements ClientModInitializer {
                 }
             }
             while (upFOVBind.consumeClick()){
-                if(config.getBoolean("ENABLE", false)){
-                    int fov = config.getNumber("FOV", 30).intValue() + 1;
-                    if(fov > 110) fov = 110;
-                    config.setNumber("FOV", fov);
-                    MINECRAFT.options.fov().set(fov);
-                }
+                changeFov(1.0, false);
             }
             while (downFOVBind.consumeClick()){
-                if(config.getBoolean("ENABLE", false)){
-                    int fov = config.getNumber("FOV", 30).intValue() - 1;
-                    if(fov < 30) fov = 30;
-                    config.setNumber("FOV", fov);
-                    MINECRAFT.options.fov().set(fov);
-                }
+                changeFov(-1.0, false);
             }
             //
             while (rightRotateBind.consumeClick()){

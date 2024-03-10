@@ -16,25 +16,15 @@ import ru.kelcuprum.camoverlay.OverlayUtils;
 import static ru.kelcuprum.camoverlay.CamOverlay.MINECRAFT;
 
 public class ConfigScreen {
-    private static final InterfaceUtils.DesignType dType = InterfaceUtils.DesignType.FLAT;
+    public static final InterfaceUtils.DesignType dType = InterfaceUtils.DesignType.FLAT;
     private static Boolean lastEnable = CamOverlay.config.getBoolean("ENABLE", false);
 
     public static Screen build(Screen parent) {
         ConfigScreenBuilder builder = new ConfigScreenBuilder(parent, Component.translatable("camoverlay.name"), dType)
                 .setOnTick((d) -> {
-                            if(lastEnable != CamOverlay.config.getBoolean("ENABLE", false)){
-            lastEnable = CamOverlay.config.getBoolean("ENABLE", false);
-                                if (lastEnable) {
-                                    // Замена FOV
-                                    CamOverlay.lastFOV = MINECRAFT.options.fov().get();
-                                    CamOverlay.config.setNumber("FOV.LAST", CamOverlay.lastFOV);
-                                    if (CamOverlay.config.getBoolean("ENABLE.SET_FOV", true))
-                                        MINECRAFT.options.fov().set(CamOverlay.config.getNumber("FOV", 30).intValue());
-                                } else {
-                                    // Замена FOV
-                                    MINECRAFT.options.fov().set(CamOverlay.lastFOV);
-                                }
-                            }
+                    if (lastEnable != CamOverlay.config.getBoolean("ENABLE", false)) {
+                        lastEnable = CamOverlay.config.getBoolean("ENABLE", false);
+                    }
                 })
                 .addPanelWidget(new Button(10, 40, 100, 20, dType, Component.translatable("camoverlay.options"), (s) -> MINECRAFT.setScreen(ConfigScreen.build(parent))))
                 .addPanelWidget(new Button(10, 65, 100, 20, dType, Component.translatable("camoverlay.options.advanced"), (s) -> MINECRAFT.setScreen(AdvancedConfigScreen.build(parent))));
@@ -42,6 +32,7 @@ public class ConfigScreen {
 
         builder.addWidget(new ButtonConfigBoolean(140, 30, dType, CamOverlay.config, "ENABLE", false, Component.translatable("camoverlay.options.enable")));
         builder.addWidget(new ButtonConfigBoolean(140, 55, dType, CamOverlay.config, "ENABLE.OVERLAY", false, Component.translatable("camoverlay.options.enable.overlay")));
+        builder.addWidget(new SliderConfigInteger(140, 80, dType, CamOverlay.config, "FOV", 0, 1, 110, Component.translatable("camoverlay.options.advanced.fov")));
         builder.addWidget(new ButtonConfigBoolean(140, 80, dType, CamOverlay.config, "RECORD_MODE", false, Component.translatable("camoverlay.options.record_mode")));
         String[] type = {
                 OverlayUtils.Type.CAMIKONSHOT.name.getString(),

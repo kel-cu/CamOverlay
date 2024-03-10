@@ -8,11 +8,9 @@ import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
 import ru.kelcuprum.alinlib.gui.components.sliders.SliderConfigInteger;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 import ru.kelcuprum.alinlib.gui.screens.ConfigScreenBuilder;
-import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 import ru.kelcuprum.camoverlay.CamOverlay;
 
 import static ru.kelcuprum.camoverlay.CamOverlay.MINECRAFT;
-import static ru.kelcuprum.camoverlay.CamOverlay.TOAST_ICON;
 
 public class AdvancedConfigScreen{
     private static final InterfaceUtils.DesignType dType = InterfaceUtils.DesignType.FLAT;
@@ -24,20 +22,10 @@ public class AdvancedConfigScreen{
                 .addPanelWidget(new Button(10, 65, 100, 20, dType, Component.translatable("camoverlay.options.advanced"), (s) -> {
                     MINECRAFT.setScreen(AdvancedConfigScreen.build(parent));
                 }));
-        if(CamOverlay.config.getBoolean("ENABLE", false)){
-            CamOverlay.config.setBoolean("ENABLE", false);
-            new ToastBuilder()
-                    .setIcon(TOAST_ICON)
-                    .setTitle(Component.translatable("camoverlay.name"))
-                    .setMessage(Component.translatable("camoverlay.toast.disable.screen"))
-                    .show(MINECRAFT.getToasts());
-            MINECRAFT.options.fov().set(CamOverlay.lastFOV);
-        }
         builder.addWidget(new TextBox(140, 5, Component.translatable("camoverlay.options.advanced"), true));
 
         builder.addWidget(new ButtonConfigBoolean(140, 30, dType, CamOverlay.config, "DISABLE.HANDS", true, Component.translatable("camoverlay.options.advanced.disable.hands")));
         builder.addWidget(new SliderConfigInteger(140, 55, dType, CamOverlay.config, "ROTATE", 0, -180, 180, Component.translatable("camoverlay.options.advanced.rotate")));
-        builder.addWidget(new SliderConfigInteger(140, 80, dType, CamOverlay.config, "FOV", 0, 30, 110, Component.translatable("camoverlay.options.advanced.fov")));
         builder.addWidget(new ButtonConfigBoolean(140, 105, dType, CamOverlay.config, "ENABLE.SET_FOV", true, Component.translatable("camoverlay.options.advanced.enable.set_fov")));
         builder.addWidget(new ButtonConfigBoolean(140, 130, dType, CamOverlay.config, "WORLD_TIME", false, Component.translatable("camoverlay.options.advanced.world_time")));
 
