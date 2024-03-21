@@ -14,7 +14,6 @@ import ru.kelcuprum.alinlib.config.Config;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Level;
-import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 import ru.kelcuprum.camoverlay.localization.StarScript;
 import ru.kelcuprum.camoverlay.screens.config.ConfigScreen;
@@ -34,7 +33,7 @@ public class CamOverlay implements ClientModInitializer {
         registerBinds();
     }
     public static Double getFov(double fov){
-        return config.getBoolean("ENABLE.SET_FOV", true) && config.getBoolean("ENABLE", true) ? config.getNumber("FOV", 30).doubleValue() : fov;
+        return config.getBoolean("ENABLE.SET_FOV", true) && config.getBoolean("ENABLE", false) ? config.getNumber("FOV", 30).doubleValue() : fov;
     }
     public static void changeFov(double mouseScroll, boolean isMouse){
         if(isMouse && !config.getBoolean("ENABLE.SCROLL_FOV", true)) return;
@@ -116,7 +115,7 @@ public class CamOverlay implements ClientModInitializer {
             while (enableModBind.consumeClick()) {
                 boolean state = !config.getBoolean("ENABLE", false);
                 config.setBoolean("ENABLE", state);
-                new ToastBuilder()
+                if(CamOverlay.config.getBoolean("ENABLE.TOAST", false)) new ToastBuilder()
                         .setIcon(TOAST_ICON)
                         .setTitle(Component.translatable("camoverlay.name"))
                         .setMessage(Component.translatable("camoverlay.toast."+(state ? "enable" : "disable")))

@@ -28,6 +28,7 @@ public class AdvancedConfigScreen{
         builder.addWidget(new SliderConfigInteger(140, 55, dType, CamOverlay.config, "ROTATE", 0, -180, 180, Component.translatable("camoverlay.options.advanced.rotate")));
         builder.addWidget(new ButtonConfigBoolean(140, 105, dType, CamOverlay.config, "ENABLE.SET_FOV", true, Component.translatable("camoverlay.options.advanced.enable.set_fov")));
         builder.addWidget(new ButtonConfigBoolean(140, 130, dType, CamOverlay.config, "WORLD_TIME", false, Component.translatable("camoverlay.options.advanced.world_time")));
+        builder.addWidget(new ButtonConfigBoolean(140, 130, dType, CamOverlay.config, "ENABLE.TOAST", false, Component.translatable("camoverlay.options.advanced.enable.toast")));
 
         return builder.build();
     }

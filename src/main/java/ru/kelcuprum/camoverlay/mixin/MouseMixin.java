@@ -18,6 +18,6 @@ public class MouseMixin {
 
     @Redirect(method = "onScroll", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Inventory;swapPaint(D)V"))
     private void swapPoint(Inventory instance, double direction){
-        if(!(CamOverlay.config.getBoolean("ENABLE", true) && CamOverlay.config.getBoolean("ENABLE.SCROLL_FOV", true))) instance.swapPaint(direction);
+        if(!(CamOverlay.config.getBoolean("ENABLE", false) && CamOverlay.config.getBoolean("ENABLE.SCROLL_FOV", true))) instance.swapPaint(direction);
     }
 }
