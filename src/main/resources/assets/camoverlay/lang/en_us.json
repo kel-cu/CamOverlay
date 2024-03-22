@@ -30,6 +30,7 @@
   "camoverlay.options.advanced.fov": "FOV",
   "camoverlay.options.advanced.enable.set_fov": "Auto set FOV",
   "camoverlay.options.advanced.world_time": "Show world time",
+  "camoverlay.options.advanced.enable.toast": "Show toasts",
 
 
   "camoverlay.camikonshot": "CamikonShot",

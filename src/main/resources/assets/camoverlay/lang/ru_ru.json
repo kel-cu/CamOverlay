@@ -30,7 +30,7 @@
   "camoverlay.options.advanced.fov": "FOV",
   "camoverlay.options.advanced.enable.set_fov": "Заменять FOV",
   "camoverlay.options.advanced.world_time": "Показывать время мира",
-
+  "camoverlay.options.advanced.enable.toast": "Показывать уведомления",
 
   "camoverlay.camikonshot": "CamikonShot",
   "camoverlay.camikonshot.rec": "§c\uD83D\uDD34§r ЗАПИСЬ",

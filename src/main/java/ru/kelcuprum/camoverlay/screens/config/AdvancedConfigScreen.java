@@ -16,12 +16,8 @@ public class AdvancedConfigScreen{
     private static final InterfaceUtils.DesignType dType = InterfaceUtils.DesignType.FLAT;
     public static Screen build(Screen parent) {
         ConfigScreenBuilder builder = new ConfigScreenBuilder(parent, Component.translatable("camoverlay.name"), dType)
-                .addPanelWidget(new Button(10, 40, 100, 20, dType, Component.translatable("camoverlay.options"), (s) -> {
-                    MINECRAFT.setScreen(ConfigScreen.build(parent));
-                }))
-                .addPanelWidget(new Button(10, 65, 100, 20, dType, Component.translatable("camoverlay.options.advanced"), (s) -> {
-                    MINECRAFT.setScreen(AdvancedConfigScreen.build(parent));
-                }));
+                .addPanelWidget(new Button(10, 40, 100, 20, dType, Component.translatable("camoverlay.options"), (s) -> MINECRAFT.setScreen(ConfigScreen.build(parent))))
+                .addPanelWidget(new Button(10, 65, 100, 20, dType, Component.translatable("camoverlay.options.advanced"), (s) -> MINECRAFT.setScreen(AdvancedConfigScreen.build(parent))));
         builder.addWidget(new TextBox(140, 5, Component.translatable("camoverlay.options.advanced"), true));
 
         builder.addWidget(new ButtonConfigBoolean(140, 30, dType, CamOverlay.config, "DISABLE.HANDS", true, Component.translatable("camoverlay.options.advanced.disable.hands")));
