@@ -7,9 +7,9 @@
   "description": "Mod for camera control and different overlays",
   "authors": ["Im_Kel"],
   "contact": {
-    "sources": "https://github.com/simply-kel/CamOverlay",
+    "sources": "https://github.com/kel-cu/CamOverlay",
     "homepage": "https://modrinth.com/project/CamOverlay",
-    "issues": "https://github.com/simply-kel/CamOverlay/issues",
+    "issues": "https://github.com/kel-cu/CamOverlay/issues",
     "email": "me@kelcuprum.ru"
   },
 
@@ -32,7 +32,7 @@
   "depends": {
     "fabricloader": "*",
     "fabric": "*",
-    "minecraft": ">=1.20.2",
+    "minecraft": ">=1.20.5",
     "alinlib": "*"
   },
   "accessWidener": "camoverlay.accesswidener",
@@ -40,7 +40,7 @@
     "modmenu": {
       "links": {
         "modmenu.modrinth": "https://modrinth.com/project/CamOverlay",
-        "modmenu.donate": "https://kelcuprum.ru/r/don"
+        "modmenu.donate": "https://kelcu.ru/don"
       }
     }
   }

@@ -15,14 +15,14 @@ import ru.kelcuprum.camoverlay.CamOverlay;
 public abstract class GameRendererMixin {
 
     @Inject(
-            method = "renderLevel",
+            method = "bobView",
             at = @At(
                     value = "INVOKE",
                     target = "Lcom/mojang/math/Axis;rotationDegrees(F)Lorg/joml/Quaternionf;",
-                    ordinal = 2
+                    ordinal = 1
             )
     )
-    public void renderWorld(float partialTicks, long finishTimeNano, PoseStack poseStack, CallbackInfo ci){
+    public void bobView(PoseStack poseStack, float f, CallbackInfo ci){
         if(!CamOverlay.config.getBoolean("ENABLE", false)) return;
         poseStack.mulPose(Axis.ZP.rotationDegrees(CamOverlay.config.getNumber("ROTATE", 0f).floatValue()));
     }

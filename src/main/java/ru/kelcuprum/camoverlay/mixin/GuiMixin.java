@@ -10,6 +10,7 @@ import net.minecraft.util.Mth;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -18,9 +19,9 @@ import ru.kelcuprum.camoverlay.OverlayUtils;
 
 @Mixin(Gui.class)
 public abstract class GuiMixin {
-    @Shadow
+    @Unique
     private int screenWidth;
-    @Shadow
+    @Unique
     private int screenHeight;
 
     @Shadow @Final private Minecraft minecraft;
@@ -45,7 +46,7 @@ public abstract class GuiMixin {
             int n = Mth.floor(this.minecraft.mouseHandler.xpos() * (double)window.getGuiScaledWidth() / (double)window.getScreenWidth());
             int p = Mth.floor(this.minecraft.mouseHandler.ypos() * (double)window.getGuiScaledHeight() / (double)window.getScreenHeight());
             this.minecraft.getProfiler().push("chat");
-            this.chat.render(guiGraphics, tickCount, n, p);
+            this.chat.render(guiGraphics, tickCount, n, p, true);
         }
         ci.cancel();
     }
