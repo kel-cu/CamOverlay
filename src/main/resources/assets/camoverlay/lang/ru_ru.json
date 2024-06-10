@@ -40,6 +40,8 @@
   "camoverlay.options.advanced.world_time": "Показывать время мира",
   "camoverlay.options.advanced.enable.toast": "Показывать уведомления",
 
+  "camoverlay.options.overlays": "Оверлеи",
+
   "camoverlay.camikonshot": "CamikonShot",
   "camoverlay.camikonshot.rec": "§c\uD83D\uDD34§r ЗАПИСЬ",
   "camoverlay.camikonshot.photo": "§9📷§r ФОТО РЕЖИМ",
@@ -56,6 +58,11 @@
 
   "camoverlay.date": "Только дата",
   "camoverlay.date.format": "MM/dd/yyyy hh:mm:ss",
+
+  "camoverlay.cinematic": "Кинематографический",
+  "camoverlay.cinematic.size": "Размер рамок",
+  "camoverlay.cinematic.top_text": "Верхний текст",
+  "camoverlay.cinematic.bottom_text": "Никний текст",
 
 
   "camoverlay.overlay.grid_3x3": "Сетка 3x3",

@@ -32,9 +32,7 @@ public abstract class GuiMixin {
         if(!CamOverlay.config.getBoolean("ENABLE", false)) return;
         int screenWidth = guiGraphics.guiWidth();
         int screenHeight = guiGraphics.guiHeight();
-//        if(CamOverlay.getSelectedOverlay() != null){
-            OverlayUtils.getSelectedOverlay().render(guiGraphics, screenWidth, screenHeight);
-//        }
+        OverlayUtils.getSelectedOverlay().render(guiGraphics, screenWidth, screenHeight);
 
         if(CamOverlay.config.getBoolean("ENABLE.HELPER", false)) OverlayUtils.getSelectedHelper().render(guiGraphics, screenWidth, screenHeight);
         if(minecraft.screen instanceof ChatScreen){

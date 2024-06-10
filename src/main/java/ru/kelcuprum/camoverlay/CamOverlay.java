@@ -1,6 +1,8 @@
 package ru.kelcuprum.camoverlay;
 
 import com.mojang.blaze3d.platform.InputConstants;
+import org.meteordev.starscript.value.Value;
+import org.meteordev.starscript.value.ValueMap;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -10,46 +12,93 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.lwjgl.glfw.GLFW;
+import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.api.events.alinlib.LocalizationEvents;
 import ru.kelcuprum.alinlib.config.Config;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Level;
+import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
-import ru.kelcuprum.camoverlay.localization.StarScript;
 import ru.kelcuprum.camoverlay.overlays.*;
 import ru.kelcuprum.camoverlay.overlays.helpers.*;
 import ru.kelcuprum.camoverlay.screens.config.ConfigScreen;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class CamOverlay implements ClientModInitializer {
     public static Config config = new Config("config/CamOverlay/config.json");
     public static Minecraft MINECRAFT = Minecraft.getInstance();
     public static final Logger LOG = LogManager.getLogger("CamOverlay");
-    public static void log(String message) { log(message, Level.INFO);}
-    public static void log(String message, Level level) { LOG.log(level, "[" + LOG.getName() + "] " + message); }
+
+    public static void log(String message) {
+        log(message, Level.INFO);
+    }
+
+    public static void log(String message, Level level) {
+        LOG.log(level, "[" + LOG.getName() + "] " + message);
+    }
+
     public static ResourceLocation TOAST_ICON = ResourceLocation.fromNamespaceAndPath("camoverlay", "textures/gui/widget/toast/icon.png");
-    public static AbstractOverlay safeModeOverlay = new SafeOverlay();
+    public static Localization localization = new Localization("camoverlay", "config/CamOverlay/lang");
+
     @Override
     public void onInitializeClient() {
         log("Hi!");
-        StarScript.init();
         registerBinds();
         registerOverlays();
         registerHelpers();
+        LocalizationEvents.DEFAULT_PARSER_INIT.register((parser) -> {
+            parser.ss.set("camoverlay", new ValueMap()
+                    .set("overlay", new ValueMap()
+                            .set("time", () -> Value.string(getTime(false)))
+                            .set("world_time", () -> Value.string(getTime(true)))
+                    )
+                    .set("window", new ValueMap()
+                            .set("width", () -> Value.number(AlinLib.MINECRAFT.getWindow().getWidth()))
+                            .set("height", () -> Value.number(AlinLib.MINECRAFT.getWindow().getHeight()))
+                            .set("scaled_width", () -> Value.number(AlinLib.MINECRAFT.getWindow().getGuiScaledWidth()))
+                            .set("scaled_height", () -> Value.number(AlinLib.MINECRAFT.getWindow().getGuiScaledHeight()))
+                    )
+            );
+        });
     }
 
-    public void registerOverlays(){
+    public static String getTime(boolean isWorld) {
+        Component dFormat = Component.translatable("camoverlay.date.format");
+        String clock;
+        String strDateFormat = "MM/dd/yyyy hh:mm:ss";
+        if (!dFormat.getString().equalsIgnoreCase("camoverlay.date.format")) strDateFormat = dFormat.getString();
+        try {
+            DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
+            if (isWorld && MINECRAFT.level != null) {
+                long daytime = MINECRAFT.level.getDayTime() + 6000;
+                int hours = (int) (daytime / 1000) % 24;
+                int minutes = (int) ((daytime % 1000) * 60 / 1000);
+                int day = (int) daytime / 1000 / 24;
+                Calendar calendar = new GregorianCalendar();
+                calendar.set(2000, Calendar.JANUARY, day + 1, hours, minutes, 0);
+                clock = dateFormat.format(calendar.getTimeInMillis());
+            } else clock = dateFormat.format(System.currentTimeMillis());
+        } catch (IllegalArgumentException ex) {
+            clock = strDateFormat;
+        }
+        return clock;
+    }
+
+    public void registerOverlays() {
         OverlayUtils.registerOverlay(new CamikonShotOverlay());
         OverlayUtils.registerOverlay(new KlashRaickOverlay());
+        OverlayUtils.registerOverlay(new CinematicOverlay());
         OverlayUtils.registerOverlay(new PhoneOverlay());
         OverlayUtils.registerOverlay(new DateOverlay());
         OverlayUtils.registerOverlay(new NoneOverlay());
     }
-    public void registerHelpers(){
+
+    public void registerHelpers() {
         OverlayUtils.registerHelper(new Grid3x3Overlay());
         OverlayUtils.registerHelper(new Grid4x4Overlay());
         OverlayUtils.registerHelper(new GridCustomOverlay());
@@ -58,18 +107,20 @@ public class CamOverlay implements ClientModInitializer {
         OverlayUtils.registerHelper(new NoneHelper());
     }
 
-    public static Double getFov(double fov){
+    public static Double getFov(double fov) {
         return config.getBoolean("ENABLE.SET_FOV", true) && config.getBoolean("ENABLE", false) ? config.getNumber("FOV", 30).doubleValue() : fov;
     }
-    public static void changeFov(double mouseScroll, boolean isMouse){
-        if(isMouse && !config.getBoolean("ENABLE.SCROLL_FOV", true)) return;
-        if(!config.getBoolean("ENABLE.SET_FOV", true) && !config.getBoolean("ENABLE", true)) return;
+
+    public static void changeFov(double mouseScroll, boolean isMouse) {
+        if (isMouse && !config.getBoolean("ENABLE.SCROLL_FOV", true)) return;
+        if (!config.getBoolean("ENABLE.SET_FOV", true) && !config.getBoolean("ENABLE", true)) return;
         double fov = config.getNumber("FOV", 30).doubleValue();
-        if(mouseScroll >= 0) fov += isMouse ? -1 : 1;
-        else if(mouseScroll <= 0) fov -= isMouse ? -1 : 1;
+        if (mouseScroll >= 0) fov += isMouse ? -1 : 1;
+        else if (mouseScroll <= 0) fov -= isMouse ? -1 : 1;
         config.setNumber("FOV", Mth.clamp(fov, 1, 110));
     }
-    public void registerBinds(){
+
+    public void registerBinds() {
         // enable
         KeyMapping enableModBind;
         enableModBind = KeyBindingHelper.registerKeyBinding(new KeyMapping(
@@ -141,48 +192,48 @@ public class CamOverlay implements ClientModInitializer {
             while (enableModBind.consumeClick()) {
                 boolean state = !config.getBoolean("ENABLE", false);
                 config.setBoolean("ENABLE", state);
-                if(CamOverlay.config.getBoolean("ENABLE.TOAST", false)) new ToastBuilder()
+                if (CamOverlay.config.getBoolean("ENABLE.TOAST", false)) new ToastBuilder()
                         .setIcon(TOAST_ICON)
                         .setTitle(Component.translatable("camoverlay.name"))
-                        .setMessage(Component.translatable("camoverlay.toast."+(state ? "enable" : "disable")))
+                        .setMessage(Component.translatable("camoverlay.toast." + (state ? "enable" : "disable")))
                         .setType(state ? ToastBuilder.Type.INFO : ToastBuilder.Type.ERROR)
                         .show(MINECRAFT.getToasts());
             }
             while (enableOverlayBind.consumeClick()) {
-                if(config.getBoolean("ENABLE", false)){
+                if (config.getBoolean("ENABLE", false)) {
                     boolean state = !config.getBoolean("ENABLE.OVERLAY", false);
                     config.setBoolean("ENABLE.OVERLAY", state);
                 }
             }
             while (recordBind.consumeClick()) {
-                if(config.getBoolean("ENABLE", false)){
+                if (config.getBoolean("ENABLE", false)) {
                     boolean state = !config.getBoolean("RECORD_MODE", true);
                     config.setBoolean("RECORD_MODE", state);
                 }
             }
-            while (upFOVBind.consumeClick()){
+            while (upFOVBind.consumeClick()) {
                 changeFov(1.0, false);
             }
-            while (downFOVBind.consumeClick()){
+            while (downFOVBind.consumeClick()) {
                 changeFov(-1.0, false);
             }
             //
-            while (rightRotateBind.consumeClick()){
-                if(config.getBoolean("ENABLE", false)){
+            while (rightRotateBind.consumeClick()) {
+                if (config.getBoolean("ENABLE", false)) {
                     float rotate = config.getNumber("ROTATE", 0F).floatValue() + 1.0F;
-                    if(rotate > 180.0f) rotate = -180.0f;
+                    if (rotate > 180.0f) rotate = -180.0f;
                     config.setNumber("ROTATE", rotate);
                 }
             }
-            while (leftRotateBind.consumeClick()){
-                if(config.getBoolean("ENABLE", false)){
+            while (leftRotateBind.consumeClick()) {
+                if (config.getBoolean("ENABLE", false)) {
                     float rotate = config.getNumber("ROTATE", 0F).floatValue() - 1.0F;
-                    if(rotate < -180.0f) rotate = 180.0f;
+                    if (rotate < -180.0f) rotate = 180.0f;
                     config.setNumber("ROTATE", rotate);
                 }
             }
-            while (resetRotateBind.consumeClick()){
-                if(config.getBoolean("ENABLE", false)){
+            while (resetRotateBind.consumeClick()) {
+                if (config.getBoolean("ENABLE", false)) {
                     config.setNumber("ROTATE", 0.0F);
                 }
             }

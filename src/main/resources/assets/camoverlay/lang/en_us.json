@@ -40,6 +40,8 @@
   "camoverlay.options.advanced.world_time": "Show world time",
   "camoverlay.options.advanced.enable.toast": "Show toasts",
 
+  "camoverlay.options.overlays": "Overlays",
+
 
   "camoverlay.camikonshot": "CamikonShot",
   "camoverlay.camikonshot.rec": "§c\uD83D\uDD34§r RECORD",
@@ -57,6 +59,11 @@
 
   "camoverlay.date": "Only date",
   "camoverlay.date.format": "MM/dd/yyyy hh:mm:ss",
+
+  "camoverlay.cinematic": "Cinematic",
+  "camoverlay.cinematic.size": "Border Size",
+  "camoverlay.cinematic.top_text": "Top Text",
+  "camoverlay.cinematic.bottom_text": "Bottom Text",
 
 
   "camoverlay.overlay.grid_3x3": "Grid 3x3",
