@@ -18,7 +18,7 @@ public abstract class AbstractOverlay {
 
     public void render(GuiGraphics guiGraphics, int width, int height){
         renderRound(guiGraphics, width, height);
-        if(!CamOverlay.config.getBoolean("ENABLE.HELPER", false)) renderCursor(guiGraphics, width, height);
+        if(!CamOverlay.config.getBoolean("ENABLE.HELPER", false) && CamOverlay.config.getBoolean("ENABLE.CURSOR", true)) renderCursor(guiGraphics, width, height);
         renderText(guiGraphics, width, height);
         renderStatus(guiGraphics, width, height);
     }

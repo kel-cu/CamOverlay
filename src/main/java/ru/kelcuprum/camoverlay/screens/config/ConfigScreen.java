@@ -3,10 +3,10 @@ package ru.kelcuprum.camoverlay.screens.config;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBooleanBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.selector.SelectorBuilder;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonConfigBoolean;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
-import ru.kelcuprum.alinlib.gui.components.selector.SelectorIntegerButton;
 import ru.kelcuprum.alinlib.gui.components.selector.SelectorStringButton;
 import ru.kelcuprum.alinlib.gui.components.sliders.SliderConfigInteger;
 import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
@@ -38,6 +38,7 @@ public class ConfigScreen {
                         .setList(OverlayUtils.getOverlayNames())
                         .setValue(OverlayUtils.getPositionOnOverlayNames(OverlayUtils.getSelectedOverlay().name.getString()))
                         .build())
+                .addValue(new ButtonBooleanBuilder(Component.translatable("camoverlay.options.enable.cursor"), true).setConfig(CamOverlay.config, "ENABLE.CURSOR").build())
                 .addValue(new SliderConfigInteger(140, 80, dType, CamOverlay.config, "FOV", 30, 1, 110, Component.translatable("camoverlay.options.advanced.fov")))
                 .addValue(new ButtonConfigBoolean(140, 80, dType, CamOverlay.config, "RECORD_MODE", false, Component.translatable("camoverlay.options.record_mode"))));
 

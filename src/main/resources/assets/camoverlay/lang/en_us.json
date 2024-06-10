@@ -22,6 +22,7 @@
   "camoverlay.options": "Options",
   "camoverlay.category.overlays": "Overlays",
   "camoverlay.options.enable": "Enable Overlay",
+  "camoverlay.options.enable.cursor": "Enable Render Cursor",
   "camoverlay.options.record_mode": "Record mode",
   "camoverlay.options.type": "Overlay Type",
 

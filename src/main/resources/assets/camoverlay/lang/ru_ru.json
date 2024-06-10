@@ -22,6 +22,7 @@
   "camoverlay.options": "Настройки",
   "camoverlay.category.overlays": "Оверлей",
   "camoverlay.options.enable": "Включить оверлей",
+  "camoverlay.options.enable.cursor": "Включить рендер курсора",
   "camoverlay.options.record_mode": "Режим записи",
   "camoverlay.options.type": "Тип оверлея",
 
