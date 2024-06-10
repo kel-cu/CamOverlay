@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.camoverlay.CamOverlay;
 
 public abstract class AbstractOverlay {
     public Minecraft minecraft = AlinLib.MINECRAFT;
@@ -17,7 +18,7 @@ public abstract class AbstractOverlay {
 
     public void render(GuiGraphics guiGraphics, int width, int height){
         renderRound(guiGraphics, width, height);
-        renderCursor(guiGraphics, width, height);
+        if(!CamOverlay.config.getBoolean("ENABLE.HELPER", false)) renderCursor(guiGraphics, width, height);
         renderText(guiGraphics, width, height);
         renderStatus(guiGraphics, width, height);
     }
