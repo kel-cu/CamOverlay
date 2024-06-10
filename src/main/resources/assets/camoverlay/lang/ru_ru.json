@@ -1,8 +1,12 @@
 {
   "camoverlay.name": "CamOverlay",
 
-  "camoverlay.binds.enable": "Включить CamOverlay",
-  "camoverlay.binds.enable.overlay": "Включить оверлей",
+  "camoverlay.safe_mode": "Спокойно, это нормально.\nПеренастройте оверлей в конфигах",
+  "camoverlay.safe_mode.helper": "Спокойно, это нормально.\nПеренастройте вспомогательный оверлей в конфигах",
+  "camoverlay.safe_mode.helper.only_text": "и вспомогательный оверлей пожалуйста :)",
+
+  "camoverlay.binds.enable": "Включить оверлей",
+  "camoverlay.binds.enable.helper": "Включить вспомогающий оверлей",
   "camoverlay.binds.record": "Включить режим записи",
   "camoverlay.binds.fov.up": "FOV +",
   "camoverlay.binds.fov.down": "FOV -",
@@ -16,11 +20,14 @@
   "camoverlay.toast.disable.screen": "Оверлей был отключен из-за конфликтов",
 
   "camoverlay.options": "Настройки",
-  "camoverlay.options.enable": "Включить мод",
-  "camoverlay.options.enable.overlay": "Включить оверлей",
+  "camoverlay.category.overlays": "Оверлей",
+  "camoverlay.options.enable": "Включить оверлей",
   "camoverlay.options.record_mode": "Режим записи",
-  "camoverlay.options.type": "Тип",
-  "camoverlay.options.type.overlay": "Тип оверлея",
+  "camoverlay.options.type": "Тип оверлея",
+
+  "camoverlay.category.helpers": "Вспомогающий оверлей",
+  "camoverlay.options.enable.helper": "Включить вспомогающий оверлей",
+  "camoverlay.options.helper": "Тип вспомогательного оверлея",
   "camoverlay.options.grid_number": "Разделите сетку на",
   "camoverlay.options.golden_ratio.rotate": "Поворот золотого сечения",
 

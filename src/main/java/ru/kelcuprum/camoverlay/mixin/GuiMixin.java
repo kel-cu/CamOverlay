@@ -32,16 +32,14 @@ public abstract class GuiMixin {
         if(!CamOverlay.config.getBoolean("ENABLE", false)) return;
         int screenWidth = guiGraphics.guiWidth();
         int screenHeight = guiGraphics.guiHeight();
-        Window window = this.minecraft.getWindow();
-        OverlayUtils.Type type = OverlayUtils.getType();
-        type.renderRound(guiGraphics, screenWidth, screenHeight);
-        type.renderCroshair(guiGraphics, screenWidth, screenHeight);
-        type.renderText(guiGraphics, minecraft, screenWidth, screenHeight);
-        type.renderStatus(guiGraphics, screenWidth, screenHeight);
-        if(CamOverlay.config.getBoolean("ENABLE.OVERLAY", false)) OverlayUtils.getOverlay().renderOverlay(guiGraphics, screenWidth, screenHeight);
+//        if(CamOverlay.getSelectedOverlay() != null){
+            OverlayUtils.getSelectedOverlay().render(guiGraphics, screenWidth, screenHeight);
+//        }
+
+        if(CamOverlay.config.getBoolean("ENABLE.HELPER", false)) OverlayUtils.getSelectedHelper().render(guiGraphics, screenWidth, screenHeight);
         if(minecraft.screen instanceof ChatScreen){
-            int n = Mth.floor(this.minecraft.mouseHandler.xpos() * (double)window.getGuiScaledWidth() / (double)window.getScreenWidth());
-            int p = Mth.floor(this.minecraft.mouseHandler.ypos() * (double)window.getGuiScaledHeight() / (double)window.getScreenHeight());
+            int n = Mth.floor(this.minecraft.mouseHandler.xpos() * (double)screenWidth / (double)screenHeight);
+            int p = Mth.floor(this.minecraft.mouseHandler.ypos() * (double)screenWidth / (double)screenHeight);
             this.minecraft.getProfiler().push("chat");
             this.chat.render(guiGraphics, tickCount, n, p, true);
         }

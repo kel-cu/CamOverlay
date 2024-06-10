@@ -16,7 +16,14 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Level;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 import ru.kelcuprum.camoverlay.localization.StarScript;
+import ru.kelcuprum.camoverlay.overlays.*;
+import ru.kelcuprum.camoverlay.overlays.helpers.*;
 import ru.kelcuprum.camoverlay.screens.config.ConfigScreen;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CamOverlay implements ClientModInitializer {
     public static Config config = new Config("config/CamOverlay/config.json");
@@ -25,13 +32,32 @@ public class CamOverlay implements ClientModInitializer {
     public static void log(String message) { log(message, Level.INFO);}
     public static void log(String message, Level level) { LOG.log(level, "[" + LOG.getName() + "] " + message); }
     public static ResourceLocation TOAST_ICON = ResourceLocation.fromNamespaceAndPath("camoverlay", "textures/gui/widget/toast/icon.png");
+    public static AbstractOverlay safeModeOverlay = new SafeOverlay();
     @Override
     public void onInitializeClient() {
         log("Hi!");
-        config.load();
         StarScript.init();
         registerBinds();
+        registerOverlays();
+        registerHelpers();
     }
+
+    public void registerOverlays(){
+        OverlayUtils.registerOverlay(new CamikonShotOverlay());
+        OverlayUtils.registerOverlay(new KlashRaickOverlay());
+        OverlayUtils.registerOverlay(new PhoneOverlay());
+        OverlayUtils.registerOverlay(new DateOverlay());
+        OverlayUtils.registerOverlay(new NoneOverlay());
+    }
+    public void registerHelpers(){
+        OverlayUtils.registerHelper(new Grid3x3Overlay());
+        OverlayUtils.registerHelper(new Grid4x4Overlay());
+        OverlayUtils.registerHelper(new GridCustomOverlay());
+        OverlayUtils.registerHelper(new GolderRationHelper());
+        OverlayUtils.registerHelper(new VerticalGolderRationHelper());
+        OverlayUtils.registerHelper(new NoneHelper());
+    }
+
     public static Double getFov(double fov){
         return config.getBoolean("ENABLE.SET_FOV", true) && config.getBoolean("ENABLE", false) ? config.getNumber("FOV", 30).doubleValue() : fov;
     }
@@ -54,7 +80,7 @@ public class CamOverlay implements ClientModInitializer {
         ));
         KeyMapping enableOverlayBind;
         enableOverlayBind = KeyBindingHelper.registerKeyBinding(new KeyMapping(
-                "camoverlay.binds.enable.overlay",
+                "camoverlay.binds.enable.helper",
                 InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_UNKNOWN, // The keycode of the key
                 "camoverlay.name"
