@@ -195,13 +195,13 @@ public class OverlayUtils {
                     }
                 }
                 case GOLDEN_RATIO -> {
-                    ResourceLocation texture = new ResourceLocation("camoverlay", "textures/overlays/golden_ratio/gr_"+CamOverlay.config.getString("GOLDEN_RATIO.ROTATE", "0")+".png");
+                    ResourceLocation texture = ResourceLocation.fromNamespaceAndPath("camoverlay", "textures/overlays/golden_ratio/gr_"+CamOverlay.config.getString("GOLDEN_RATIO.ROTATE", "0")+".png");
                     RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.ONE_MINUS_DST_COLOR, GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
                     guiGraphics.blit(texture, 0, 0, width, height, 0f, 0f, 1280, 720, 1280, 720);
                     RenderSystem.defaultBlendFunc();
                 }
                 case VERTICAL_GOLDEN_RATIO -> {
-                    ResourceLocation texture = new ResourceLocation("camoverlay", "textures/overlays/golden_ratio/grv_"+CamOverlay.config.getString("GOLDEN_RATIO.ROTATE", "0")+".png");
+                    ResourceLocation texture = ResourceLocation.fromNamespaceAndPath("camoverlay", "textures/overlays/golden_ratio/grv_"+CamOverlay.config.getString("GOLDEN_RATIO.ROTATE", "0")+".png");
                     RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.ONE_MINUS_DST_COLOR, GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
                     guiGraphics.blit(texture, 0, 0, width, height, 0f, 0f, 1280, 720, 1280, 720);
                     RenderSystem.defaultBlendFunc();

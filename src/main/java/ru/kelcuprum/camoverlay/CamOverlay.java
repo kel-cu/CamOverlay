@@ -24,7 +24,7 @@ public class CamOverlay implements ClientModInitializer {
     public static final Logger LOG = LogManager.getLogger("CamOverlay");
     public static void log(String message) { log(message, Level.INFO);}
     public static void log(String message, Level level) { LOG.log(level, "[" + LOG.getName() + "] " + message); }
-    public static ResourceLocation TOAST_ICON = new ResourceLocation("camoverlay", "textures/gui/widget/toast/icon.png");
+    public static ResourceLocation TOAST_ICON = ResourceLocation.fromNamespaceAndPath("camoverlay", "textures/gui/widget/toast/icon.png");
     @Override
     public void onInitializeClient() {
         log("Hi!");

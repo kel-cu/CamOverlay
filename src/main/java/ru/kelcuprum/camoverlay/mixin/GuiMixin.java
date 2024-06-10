@@ -1,6 +1,7 @@
 package ru.kelcuprum.camoverlay.mixin;
 
 import com.mojang.blaze3d.platform.Window;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
@@ -19,10 +20,6 @@ import ru.kelcuprum.camoverlay.OverlayUtils;
 
 @Mixin(Gui.class)
 public abstract class GuiMixin {
-    @Unique
-    private int screenWidth;
-    @Unique
-    private int screenHeight;
 
     @Shadow @Final private Minecraft minecraft;
 
@@ -31,10 +28,10 @@ public abstract class GuiMixin {
     @Shadow private int tickCount;
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
-    public void render(GuiGraphics guiGraphics, float partialTick, CallbackInfo ci) {
+    public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
         if(!CamOverlay.config.getBoolean("ENABLE", false)) return;
-        this.screenWidth = guiGraphics.guiWidth();
-        this.screenHeight = guiGraphics.guiHeight();
+        int screenWidth = guiGraphics.guiWidth();
+        int screenHeight = guiGraphics.guiHeight();
         Window window = this.minecraft.getWindow();
         OverlayUtils.Type type = OverlayUtils.getType();
         type.renderRound(guiGraphics, screenWidth, screenHeight);
