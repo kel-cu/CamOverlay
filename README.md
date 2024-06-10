@@ -17,7 +17,7 @@
 - Поворот камеры
 - Автоматическое изменения FOV
 
-## Какие типы есть?
+## Какие оверлеи есть?
 ### CamikonShot
 ![CamikonShot](https://cdn.kelcuprum.ru/camoverlay/type/CamikonShot.png)
 ### KlashRaick
@@ -29,7 +29,7 @@
 ### Ничего
 ![None](https://cdn.kelcuprum.ru/camoverlay/type/None.png)
 
-## Виды оверлея
+## Виды вспомогательных оверлеев
 ### Сетка 3x3
 ![Grid3X3](https://cdn.kelcuprum.ru/camoverlay/overlay/Grid3X3.png)
 ### Сетка 4x4
