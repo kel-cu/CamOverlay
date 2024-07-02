@@ -35,7 +35,7 @@ public class ConfigScreen {
         );
 
         builder.addWidget(new CategoryBox(Component.translatable("camoverlay.category.helpers"))
-                .addValue(new ButtonBooleanBuilder(Component.translatable("camoverlay.options.enable.helper"), false).setConfig(CamOverlay.config, "ENABLE.HELPE").build())
+                .addValue(new ButtonBooleanBuilder(Component.translatable("camoverlay.options.enable.helper"), false).setConfig(CamOverlay.config, "ENABLE.HELPER").build())
                 .addValue(new SelectorBuilder(Component.translatable("camoverlay.options.helper"), selectorButton -> CamOverlay.config.setString("HELPER", OverlayUtils.getHelperByName(selectorButton.getList()[selectorButton.getPosition()]).id))
                         .setList(OverlayUtils.getHelperNames())
                         .setValue(OverlayUtils.getPositionOnHelperNames(OverlayUtils.getSelectedHelper().name.getString()))
