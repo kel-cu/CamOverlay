@@ -7,9 +7,13 @@
     "GameRendererMixin",
     "GuiMixin",
     "ItemInHandRendererMixin",
-    "MouseMixin"
+    "MouseMixin",
+    "world.ClientLevelDataMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "mixins": [
+    "world.LevelMixin"
+  ]
 }

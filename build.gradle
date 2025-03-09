@@ -1,5 +1,5 @@
 plugins {
-    id 'dev.architectury.loom' version '1.6-SNAPSHOT'
+    id 'dev.architectury.loom' version '1.9-SNAPSHOT'
     id 'com.github.johnrengelman.shadow' version '8.1.1'
     id 'maven-publish'
 }
@@ -14,13 +14,16 @@ loom {
 
 repositories {
     mavenCentral()
-    maven { url = "https://maven.terraformersmc.com/releases" } // MODMENU
-    maven { url = "https://maven.meteordev.org/releases" } // STARSCRIPT
-    maven { url = "https://repo.kelcuprum.ru/snapshots" } // ALINLIB
-    maven { url = "https://repo.kelcuprum.ru/releases" } // ALINLIB
-    maven { url = "https://repo.kelcuprum.ru/forks" } // ALINLIB
-    maven { url = "https://repo.kelcuprum.ru/test" } // ALINLIB
+    maven { url = "https://maven.terraformersmc.com/releases" }
+    maven { url = "https://maven.meteordev.org/releases" }
+    maven { url = 'https://repo.kelcuprum.ru/snapshots' }
+    maven { url = 'https://repo.kelcuprum.ru/releases' }
+    maven { url = 'https://repo.kelcuprum.ru/forks' }
+    maven { url = 'https://repo.kelcuprum.ru/test' }
     maven { url = "https://maven.parchmentmc.org" } // MAPPINGS
+    maven { url = 'https://api.modrinth.com/maven'}
+    maven { url = "https://cursemaven.com" }
+    maven { url = "https://jitpack.io/" }
 }
 
 configurations { shade }
@@ -29,14 +32,14 @@ dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings loom.layered() {
         officialMojangMappings()
-//        parchment "org.parchmentmc.data:parchment-${project.minecraft_version}:${project.parchment_version}@zip"
+        parchment "org.parchmentmc.data:parchment-${project.minecraft_version}:${project.parchment_version}@zip"
     }
     // Fabric
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     // Community
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
-    modImplementation "ru.kelcuprum.alinlib:AlinLib-fabric:${project.alinlib_version}"
+    modImplementation "ru.kelcuprum:AlinLib-fabric:${project.alinlib_version}"
     implementation("meteordevelopment:starscript:0.3.4")
 
     subprojects.each {

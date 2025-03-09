@@ -38,7 +38,6 @@ public abstract class GuiMixin {
         if(minecraft.screen instanceof ChatScreen){
             int n = Mth.floor(this.minecraft.mouseHandler.xpos() * (double)screenWidth / (double)screenHeight);
             int p = Mth.floor(this.minecraft.mouseHandler.ypos() * (double)screenWidth / (double)screenHeight);
-            this.minecraft.getProfiler().push("chat");
             this.chat.render(guiGraphics, tickCount, n, p, true);
         }
         ci.cancel();

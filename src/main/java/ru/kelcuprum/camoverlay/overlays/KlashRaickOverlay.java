@@ -51,13 +51,13 @@ public class KlashRaickOverlay extends AbstractOverlay{
     public void renderStatus(GuiGraphics guiGraphics, int width, int height){
         double state = ((minecraft.player.getFoodData().getFoodLevel() + minecraft.player.getHealth()) / 2) / 20;
         // round
-        guiGraphics.fill(25, 25, 80, 27, 0xFFFFFFFF);
-        guiGraphics.fill(25, 25, 27, 45, 0xFFFFFFFF);
-        guiGraphics.fill(25, 43, 80, 45, 0xFFFFFFFF);
-        guiGraphics.fill(78, 25, 80, 45, 0xFFFFFFFF);
-        guiGraphics.fill(80, 30, 82, 40, 0xFFFFFFFF);
+        guiGraphics.fill(25+5, 25+5, 80+5, 27+5, 0xFFFFFFFF);
+        guiGraphics.fill(25+5, 25+5, 27+5, 45+5, 0xFFFFFFFF);
+        guiGraphics.fill(25+5, 43+5, 80+5, 45+5, 0xFFFFFFFF);
+        guiGraphics.fill(78+5, 25+5, 80+5, 45+5, 0xFFFFFFFF);
+        guiGraphics.fill(80+5, 30+5, 82+5, 40+5, 0xFFFFFFFF);
         // state
 //                    guiGraphics.fill(80, 45, 25, 25, 0x7F000000);
-        guiGraphics.fill(29, 41, (int) (29 + (47 * state)), 29, 0xFFFFFFFF);
+        guiGraphics.fill(29+5, 41+5, (int) (29+5 + (47 * state)), 29+5, 0xFFFFFFFF);
     }
 }

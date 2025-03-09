@@ -18,7 +18,7 @@ public abstract class GameRendererMixin {
         poseStack.mulPose(Axis.ZP.rotationDegrees(CamOverlay.config.getNumber("ROTATE", 0f).floatValue()));
     }
     @Inject(at = @At(value = "RETURN", ordinal = 1), method = "getFov", cancellable = true)
-    private void getFov(Camera activeRenderInfo, float partialTicks, boolean useFOVSetting, CallbackInfoReturnable<Double> cir){
-        if(CamOverlay.config.getBoolean("ENABLE", false) && CamOverlay.config.getBoolean("ENABLE.SET_FOV", true)) cir.setReturnValue(CamOverlay.getFov(cir.getReturnValueD()));
+    private void getFov(Camera activeRenderInfo, float partialTicks, boolean useFOVSetting, CallbackInfoReturnable<Float> cir){
+        if(CamOverlay.config.getBoolean("ENABLE", false) && CamOverlay.config.getBoolean("ENABLE.SET_FOV", true)) cir.setReturnValue(CamOverlay.getFov(cir.getReturnValueF()));
     }
 }

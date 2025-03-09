@@ -1,17 +1,20 @@
 package ru.kelcuprum.camoverlay;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import org.meteordev.starscript.value.Value;
-import org.meteordev.starscript.value.ValueMap;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.lwjgl.glfw.GLFW;
+import org.meteordev.starscript.value.Value;
+import org.meteordev.starscript.value.ValueMap;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.api.events.alinlib.LocalizationEvents;
 import ru.kelcuprum.alinlib.config.Config;
@@ -19,6 +22,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Level;
 import ru.kelcuprum.alinlib.config.Localization;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 import ru.kelcuprum.camoverlay.overlays.*;
 import ru.kelcuprum.camoverlay.overlays.helpers.*;
@@ -51,6 +55,9 @@ public class CamOverlay implements ClientModInitializer {
         registerBinds();
         registerOverlays();
         registerHelpers();
+        FabricLoader.getInstance().getModContainer("camoverlay").ifPresent(container -> {
+            ResourceManagerHelper.registerBuiltinResourcePack(GuiUtils.getResourceLocation("camoverlay","clover"), container, Component.translatable("resourcePack.camoverlay.clover"), ResourcePackActivationType.NORMAL);
+        });
         LocalizationEvents.DEFAULT_PARSER_INIT.register((parser) -> {
             parser.ss.set("camoverlay", new ValueMap()
                     .set("overlay", new ValueMap()
@@ -107,8 +114,8 @@ public class CamOverlay implements ClientModInitializer {
         OverlayUtils.registerHelper(new NoneHelper());
     }
 
-    public static Double getFov(double fov) {
-        return config.getBoolean("ENABLE.SET_FOV", true) && config.getBoolean("ENABLE", false) ? config.getNumber("FOV", 30).doubleValue() : fov;
+    public static Float getFov(float fov) {
+        return config.getBoolean("ENABLE.SET_FOV", true) && config.getBoolean("ENABLE", false) ? config.getNumber("FOV", 30).floatValue() : fov;
     }
 
     public static void changeFov(double mouseScroll, boolean isMouse) {
@@ -197,7 +204,7 @@ public class CamOverlay implements ClientModInitializer {
                         .setTitle(Component.translatable("camoverlay.name"))
                         .setMessage(Component.translatable("camoverlay.toast." + (state ? "enable" : "disable")))
                         .setType(state ? ToastBuilder.Type.INFO : ToastBuilder.Type.ERROR)
-                        .show(MINECRAFT.getToasts());
+                        .buildAndShow();
             }
             while (enableOverlayBind.consumeClick()) {
                 if (config.getBoolean("ENABLE", false)) {

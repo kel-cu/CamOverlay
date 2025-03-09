@@ -26,6 +26,13 @@
   "camoverlay.options.record_mode": "Режим записи",
   "camoverlay.options.type": "Тип оверлея",
 
+  "camoverlay.options.time": "Настройки времени",
+  "camoverlay.options.time.enable": "Включить кастомное время",
+  "camoverlay.options.time.time": "Кастомное время",
+  "camoverlay.options.weather.enable": "Включить кастомную погоду",
+  "camoverlay.options.weather.enable.rain": "Включить дождь",
+  "camoverlay.options.weather.enable.thundering": "Включить шторм",
+
   "camoverlay.category.helpers": "Вспомогающий оверлей",
   "camoverlay.options.enable.helper": "Включить вспомогающий оверлей",
   "camoverlay.options.helper": "Тип вспомогательного оверлея",
@@ -54,7 +61,7 @@
   "camoverlay.klashraick.height": "Высота - 165",
 
   "camoverlay.phone": "Телефон",
-  "camoverlay.phone.cam": "Kelmi Note 6",
+  "camoverlay.phone.cam": "SHOT ON KI 9T",
 
   "camoverlay.date": "Только дата",
   "camoverlay.date.format": "MM/dd/yyyy hh:mm:ss",
@@ -70,6 +77,9 @@
   "camoverlay.overlay.grid_custom": "Кастомая сетка",
   "camoverlay.overlay.golden_ratio": "Золотое сечение",
   "camoverlay.overlay.vertical_golden_ratio": "Верт. золотое сечение",
+
+  "resourcePack.camoverlay.clover": "Иконка клевера",
+  "resourcePack.camoverlay.clover.description": "Ресурс-пак заменяющий иконку лампы на клевер",
 
   "camoverlay.none": "Ничего :/",
 

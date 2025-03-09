@@ -5,6 +5,9 @@ import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.camoverlay.CamOverlay;
 
+import static ru.kelcuprum.alinlib.gui.Colors.CLOWNFISH;
+import static ru.kelcuprum.alinlib.gui.Colors.GROUPIE;
+
 public class CamikonShotOverlay extends AbstractOverlay{
     public CamikonShotOverlay() {
         super(Component.translatable("camoverlay.camikonshot"), "camikon");
@@ -51,10 +54,10 @@ public class CamikonShotOverlay extends AbstractOverlay{
     public void renderStatus(GuiGraphics guiGraphics, int width, int height){
         guiGraphics.fill(width - 80, height - 30, width - 25, height - 25, 0x7F000000);
         double stateHealth = (minecraft.player.getHealth() / minecraft.player.getMaxHealth());
-        guiGraphics.fill(width - 25, height - 30, (int) (width - 25 - (55 * stateHealth)), height - 25, 0xFFFFFFFF);
+            guiGraphics.fill(width - 25, height - 30, (int) (width - 25 - (55 * stateHealth)), height - 25, GROUPIE);
 
         guiGraphics.fill(width - 80, height - 38, width - 25, height - 33, 0x7F000000);
         double stateFood = ((double) minecraft.player.getFoodData().getFoodLevel() / 20);
-        guiGraphics.fill(width - 25, height - 38, (int) (width - 25 - (55 * stateFood)), height - 33, 0xFFFFFFFF);
+        guiGraphics.fill(width - 25, height - 38, (int) (width - 25 - (55 * stateFood)), height - 33, CLOWNFISH);
     }
 }

@@ -26,6 +26,13 @@
   "camoverlay.options.record_mode": "Record mode",
   "camoverlay.options.type": "Overlay Type",
 
+  "camoverlay.options.time": "Time Options",
+  "camoverlay.options.time.enable": "Enable Custom Time",
+  "camoverlay.options.time.time": "Custom Time",
+  "camoverlay.options.weather.enable": "Enable Custom Weather",
+  "camoverlay.options.weather.enable.rain": "Enable Rain",
+  "camoverlay.options.weather.enable.thundering": "Enable Thundering",
+
   "camoverlay.category.helpers": "Auxiliary Overlays",
   "camoverlay.options.enable.helper": "Enable Auxiliary Overlay",
   "camoverlay.options.helper": "Auxiliary Overlay type",
@@ -55,7 +62,7 @@
   "camoverlay.klashraick.height": "Height - 165",
 
   "camoverlay.phone": "Phone",
-  "camoverlay.phone.cam": "Kelmi Note 6",
+  "camoverlay.phone.cam": "SHOT ON KI 9T",
 
   "camoverlay.date": "Only date",
   "camoverlay.date.format": "MM/dd/yyyy hh:mm:ss",
@@ -71,6 +78,9 @@
   "camoverlay.overlay.grid_custom": "Custom grid",
   "camoverlay.overlay.golden_ratio": "Golden Ratio",
   "camoverlay.overlay.vertical_golden_ratio": "Vertical Golden Ratio",
+
+  "resourcePack.camoverlay.clover": "Clover Icon",
+  "resourcePack.camoverlay.clover.description": "Resource pack replacing the lamp icon with a clover",
 
   "camoverlay.none": "None :/",
 
