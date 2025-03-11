@@ -50,21 +50,27 @@
   "camoverlay.options.overlays": "Оверлеи",
 
   "camoverlay.camikonshot": "CamikonShot",
-  "camoverlay.camikonshot.rec": "§c\uD83D\uDD34§r ЗАПИСЬ",
-  "camoverlay.camikonshot.photo": "§9📷§r ФОТО РЕЖИМ",
-  "camoverlay.camikonshot.cam": "CamikonShot E8500",
+  "camoverlay.camikonshot.rec": "§c\uD83D\uDD34§r ЗАП",
+  "camoverlay.camikonshot.photo": "§9📷§r ФОТО",
+  "camoverlay.camikonshot.name": "Название фотоаппарата",
 
   "camoverlay.klashraick": "KlashRaick",
-  "camoverlay.klashraick.rec": "§c\uD83D\uDD34 ЗАПИСЬ§r",
-  "camoverlay.klashraick.photo": "§9📷 ФОТО РЕЖИМ§r",
-  "camoverlay.klashraick.cam": "Камела 0",
-  "camoverlay.klashraick.height": "Высота - 165",
+  "camoverlay.klashraick.rec": "§c\uD83D\uDD34 ЗАП§r",
+  "camoverlay.klashraick.photo": "§9📷 ФОТО§r",
+  "camoverlay.klashraick.cam": "Камела %s",
+  "camoverlay.klashraick.height": "Высота - %S",
+  "camoverlay.klashraick.camera": "Камела",
+  "camoverlay.klashraick.size": "Размер",
 
   "camoverlay.phone": "Телефон",
   "camoverlay.phone.cam": "SHOT ON KI 9T",
+  "camoverlay.phone.text": "Свой текст",
+  "camoverlay.phone.date": "Дата",
+
+  "camoverlay.carcam": "КАРКАМ",
 
   "camoverlay.date": "Только дата",
-  "camoverlay.date.format": "MM/dd/yyyy hh:mm:ss",
+  "camoverlay.date.format": "yyyy/MM/dd HH:mm:ss",
 
   "camoverlay.cinematic": "Кинематографический",
   "camoverlay.cinematic.size": "Размер рамок",

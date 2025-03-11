@@ -2,6 +2,7 @@ package ru.kelcuprum.camoverlay.screens.config;
 
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBooleanBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.editbox.EditBoxBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.slider.SliderBuilder;
@@ -23,8 +24,17 @@ public class OverlaysScreen {
 
         builder.addWidget(new TextBuilder(Component.translatable("camoverlay.options.overlays")));
 
-//        builder.addWidget(new CategoryBox(Component.translatable("camoverlay.camikonshot")));
-//        builder.addWidget(new CategoryBox(Component.translatable("camoverlay.klashraick")));
+        builder.addWidget(new CategoryBox(Component.translatable("camoverlay.camikonshot"))
+                .addValue(new EditBoxBuilder(Component.translatable("camoverlay.camikonshot.name")).setValue("CamikonShot E8500").setConfig(CamOverlay.config, "CAMIKONSHOT.NAME").build())
+        );
+        builder.addWidget(new CategoryBox(Component.translatable("camoverlay.klashraick"))
+                .addValue(new EditBoxBuilder(Component.translatable("camoverlay.klashraick.size")).setValue("165").setConfig(CamOverlay.config, "KLASHRAICK.SIZE").build())
+                .addValue(new EditBoxBuilder(Component.translatable("camoverlay.klashraick.camera")).setValue("0").setConfig(CamOverlay.config, "KLASHRAICK.CAMERA").build())
+        );
+        builder.addWidget(new CategoryBox(Component.translatable("camoverlay.phone"))
+                .addValue(new EditBoxBuilder(Component.translatable("camoverlay.phone.text")).setValue("CamOverlay").setConfig(CamOverlay.config, "PHONE.TEXT").build())
+                .addValue(new ButtonBooleanBuilder(Component.translatable("camoverlay.phone.date"), true).setConfig(CamOverlay.config, "PHONE.DATE"))
+        );
         builder.addWidget(new CategoryBox(Component.translatable("camoverlay.cinematic"))
                 .addValue(new SliderBuilder(Component.translatable("camoverlay.cinematic.size")).setDefaultValue(30).setMin(30).setMax(300).setConfig(CamOverlay.config, "CINEMATIC.SIZE").build())
                 .addValue(new EditBoxBuilder(Component.translatable("camoverlay.cinematic.top_text")).setValue(CamOverlay.config.getString("CINEMATIC.TOP_TEXT", "{world.name}")).setConfig(CamOverlay.config, "CINEMATIC.TOP_TEXT").build())

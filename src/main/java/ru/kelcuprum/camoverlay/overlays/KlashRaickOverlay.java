@@ -36,8 +36,8 @@ public class KlashRaickOverlay extends AbstractOverlay{
     @Override
     public void renderText(GuiGraphics guiGraphics, int width, int height){
         Component rec = Component.translatable("camoverlay.klashraick." + (CamOverlay.config.getBoolean("RECORD_MODE", true) ? "rec" : "photo"));
-        Component heightS = Component.translatable("camoverlay.klashraick.height");
-        Component cam = Component.translatable("camoverlay.klashraick.cam");
+        Component heightS = Component.translatable("camoverlay.klashraick.height", CamOverlay.config.getString("KLASHRAICK.SIZE", "165"));
+        Component cam = Component.translatable("camoverlay.klashraick.cam", CamOverlay.config.getString("KLASHRAICK.CAMERA", "0"));
         Component rotate = Component.literal(String.format("%s°", CamOverlay.config.getNumber("ROTATE", 0F).floatValue()));
         // CENTER BOTTOM
         guiGraphics.drawCenteredString(minecraft.font, rec, width / 2, 22, 0xFFFFFFFF);

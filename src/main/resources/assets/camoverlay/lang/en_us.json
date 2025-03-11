@@ -51,18 +51,25 @@
 
 
   "camoverlay.camikonshot": "CamikonShot",
-  "camoverlay.camikonshot.rec": "§c\uD83D\uDD34§r RECORD",
-  "camoverlay.camikonshot.photo": "§9📷§r PHOTO MODE",
-  "camoverlay.camikonshot.cam": "CamikonShot E8500",
+  "camoverlay.camikonshot.rec": "§c\uD83D\uDD34§r REC",
+  "camoverlay.camikonshot.photo": "§9📷§r PHOTO",
+  "camoverlay.camikonshot.name": "Camera Name",
 
   "camoverlay.klashraick": "KlashRaick",
-  "camoverlay.klashraick.rec": "§c\uD83D\uDD34 LECORD§r",
-  "camoverlay.klashraick.photo": "§9📷 PHOTO MODE§r",
-  "camoverlay.klashraick.cam": "Camela 0",
-  "camoverlay.klashraick.height": "Height - 165",
+  "camoverlay.klashraick.rec": "§c\uD83D\uDD34 LEC§r",
+  "camoverlay.klashraick.photo": "§9📷 PHOTO§r",
+  "camoverlay.klashraick.cam": "Camela %s",
+  "camoverlay.klashraick.height": "Height - %s",
+  "camoverlay.klashraick.camera": "Camela",
+  "camoverlay.klashraick.size": "Size",
 
   "camoverlay.phone": "Phone",
   "camoverlay.phone.cam": "SHOT ON KI 9T",
+  "camoverlay.phone.text": "Your Text",
+  "camoverlay.phone.date": "Date",
+
+  "camoverlay.carcam": "CARCAM",
+  "camoverlay.carcam.date": "MM/dd/yyyy   hh:mm:ss",
 
   "camoverlay.date": "Only date",
   "camoverlay.date.format": "MM/dd/yyyy hh:mm:ss",

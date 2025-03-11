@@ -51,7 +51,6 @@ public class CamOverlay implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        log("Hi!");
         registerBinds();
         registerOverlays();
         registerHelpers();
@@ -99,6 +98,7 @@ public class CamOverlay implements ClientModInitializer {
     public void registerOverlays() {
         OverlayUtils.registerOverlay(new CamikonShotOverlay());
         OverlayUtils.registerOverlay(new KlashRaickOverlay());
+        OverlayUtils.registerOverlay(new CarCamOverlay());
         OverlayUtils.registerOverlay(new CinematicOverlay());
         OverlayUtils.registerOverlay(new PhoneOverlay());
         OverlayUtils.registerOverlay(new DateOverlay());
@@ -141,13 +141,6 @@ public class CamOverlay implements ClientModInitializer {
                 "camoverlay.binds.enable.helper",
                 InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_UNKNOWN, // The keycode of the key
-                "camoverlay.name"
-        ));
-        KeyMapping recordBind;
-        recordBind = KeyBindingHelper.registerKeyBinding(new KeyMapping(
-                "camoverlay.binds.record",
-                InputConstants.Type.KEYSYM,
-                GLFW.GLFW_KEY_RIGHT_ALT, // The keycode of the key
                 "camoverlay.name"
         ));
         // Setting
@@ -208,14 +201,8 @@ public class CamOverlay implements ClientModInitializer {
             }
             while (enableOverlayBind.consumeClick()) {
                 if (config.getBoolean("ENABLE", false)) {
-                    boolean state = !config.getBoolean("ENABLE.OVERLAY", false);
-                    config.setBoolean("ENABLE.OVERLAY", state);
-                }
-            }
-            while (recordBind.consumeClick()) {
-                if (config.getBoolean("ENABLE", false)) {
-                    boolean state = !config.getBoolean("RECORD_MODE", true);
-                    config.setBoolean("RECORD_MODE", state);
+                    boolean state = !config.getBoolean("ENABLE.HELPER", false);
+                    config.setBoolean("ENABLE.HELPER", state);
                 }
             }
             while (upFOVBind.consumeClick()) {

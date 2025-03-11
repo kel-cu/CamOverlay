@@ -2,6 +2,8 @@ package ru.kelcuprum.camoverlay.overlays;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.camoverlay.CamOverlay;
 
@@ -39,7 +41,7 @@ public class CamikonShotOverlay extends AbstractOverlay{
     @Override
     public void renderText(GuiGraphics guiGraphics, int width, int height){
         Component rec = Component.translatable("camoverlay.camikonshot." + (CamOverlay.config.getBoolean("RECORD_MODE", true) ? "rec" : "photo"));
-        Component cam = Component.translatable("camoverlay.camikonshot.cam");
+        Component cam = Component.literal(Localization.fixFormatCodes(CamOverlay.config.getString("CAMIKONSHOT.NAME", "CamikonShot E8500")));
         Component info = Component.literal(String.format("Frame: %sx%s  FPS: %s  FOV: %s", minecraft.getWindow().getWidth(), minecraft.getWindow().getHeight(), minecraft.getFps(), Localization.getRounding(CamOverlay.getFov(minecraft.options.fov().get()), true)));
         Component rotate = Component.literal(String.format("%s°", CamOverlay.config.getNumber("ROTATE", 0F).floatValue()));
         // CENTER BOTTOM
