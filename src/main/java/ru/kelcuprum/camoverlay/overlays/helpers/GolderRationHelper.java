@@ -1,11 +1,9 @@
 package ru.kelcuprum.camoverlay.overlays.helpers;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import ru.kelcuprum.camoverlay.CamOverlay;
 
 public class GolderRationHelper extends AbstractHelper {
@@ -14,10 +12,8 @@ public class GolderRationHelper extends AbstractHelper {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int width, int height) {
-        ResourceLocation texture = ResourceLocation.fromNamespaceAndPath("camoverlay", "textures/overlays/golden_ratio/gr_"+ CamOverlay.config.getString("GOLDEN_RATIO.ROTATE", "0")+".png");
-        RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.ONE_MINUS_DST_COLOR, GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-        guiGraphics.blit(RenderType::guiTexturedOverlay, texture, 0, 0, width, height, width, height, width, height);
-        RenderSystem.defaultBlendFunc();
+    public void render(GuiGraphicsExtractor guiGraphics, int width, int height) {
+        Identifier texture = Identifier.fromNamespaceAndPath("camoverlay", "textures/overlays/golden_ratio/gr_"+ CamOverlay.config.getString("GOLDEN_RATIO.ROTATE", "0")+".png");
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, texture, 0, 0, width, height, width, height, width, height);
     }
 }

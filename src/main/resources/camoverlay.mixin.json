@@ -4,6 +4,7 @@
   "package": "ru.kelcuprum.camoverlay.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
+    "CameraMixin",
     "GameRendererMixin",
     "GuiMixin",
     "ItemInHandRendererMixin",

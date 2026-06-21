@@ -19,10 +19,10 @@ public class ConfigScreen {
 
     public static Screen build(Screen parent) {
         ConfigScreenBuilder builder = new ConfigScreenBuilder(parent, Component.translatable("camoverlay.name"))
-                .addPanelWidget(new ButtonBuilder(Component.translatable("camoverlay.options"), (s) -> MINECRAFT.setScreen(ConfigScreen.build(parent))).build())
-                .addPanelWidget(new ButtonBuilder(Component.translatable("camoverlay.options.time"), (s) -> MINECRAFT.setScreen(TimeConfigScreen.build(parent))).build())
-                .addPanelWidget(new ButtonBuilder(Component.translatable("camoverlay.options.advanced"), (s) -> MINECRAFT.setScreen(AdvancedConfigScreen.build(parent))).build())
-                .addPanelWidget(new ButtonBuilder(Component.translatable("camoverlay.options.overlays"), (s) -> MINECRAFT.setScreen(OverlaysScreen.build(parent))).build());
+                .addPanelWidget(new ButtonBuilder(Component.translatable("camoverlay.options"), (s) -> MINECRAFT.setScreenAndShow(ConfigScreen.build(parent))).build())
+                .addPanelWidget(new ButtonBuilder(Component.translatable("camoverlay.options.time"), (s) -> MINECRAFT.setScreenAndShow(TimeConfigScreen.build(parent))).build())
+                .addPanelWidget(new ButtonBuilder(Component.translatable("camoverlay.options.advanced"), (s) -> MINECRAFT.setScreenAndShow(AdvancedConfigScreen.build(parent))).build())
+                .addPanelWidget(new ButtonBuilder(Component.translatable("camoverlay.options.overlays"), (s) -> MINECRAFT.setScreenAndShow(OverlaysScreen.build(parent))).build());
         builder.addWidget(new TextBuilder(Component.translatable("camoverlay.options")));
 
         builder.addWidget(new CategoryBox(Component.translatable("camoverlay.category.overlays"))

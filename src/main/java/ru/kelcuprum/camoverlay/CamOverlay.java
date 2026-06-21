@@ -3,19 +3,20 @@ package ru.kelcuprum.camoverlay;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import org.lwjgl.glfw.GLFW;
 import org.meteordev.starscript.value.Value;
 import org.meteordev.starscript.value.ValueMap;
 import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.CommonUtils;
+import ru.kelcuprum.alinlib.api.KeyMappingHelper;
 import ru.kelcuprum.alinlib.api.events.alinlib.LocalizationEvents;
 import ru.kelcuprum.alinlib.config.Config;
 import org.apache.logging.log4j.LogManager;
@@ -46,7 +47,7 @@ public class CamOverlay implements ClientModInitializer {
         LOG.log(level, "[" + LOG.getName() + "] " + message);
     }
 
-    public static ResourceLocation TOAST_ICON = ResourceLocation.fromNamespaceAndPath("camoverlay", "textures/gui/widget/toast/icon.png");
+    public static Identifier TOAST_ICON = Identifier.fromNamespaceAndPath("camoverlay", "textures/gui/widget/toast/icon.png");
     public static Localization localization = new Localization("camoverlay", "config/CamOverlay/lang");
 
     @Override
@@ -81,7 +82,7 @@ public class CamOverlay implements ClientModInitializer {
         try {
             DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
             if (isWorld && MINECRAFT.level != null) {
-                long daytime = MINECRAFT.level.getDayTime() + 6000;
+                long daytime = MINECRAFT.level.getGameTime() + 6000;
                 int hours = (int) (daytime / 1000) % 24;
                 int minutes = (int) ((daytime % 1000) * 60 / 1000);
                 int day = (int) daytime / 1000 / 24;
@@ -130,60 +131,52 @@ public class CamOverlay implements ClientModInitializer {
     public void registerBinds() {
         // enable
         KeyMapping enableModBind;
-        enableModBind = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+        enableModBind = KeyMappingHelper.register(CommonUtils.getKeyMapping(
                 "camoverlay.binds.enable",
-                InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_RIGHT_CONTROL, // The keycode of the key
                 "camoverlay.name"
         ));
         KeyMapping enableOverlayBind;
-        enableOverlayBind = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+        enableOverlayBind = KeyMappingHelper.register(CommonUtils.getKeyMapping(
                 "camoverlay.binds.enable.helper",
-                InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_UNKNOWN, // The keycode of the key
                 "camoverlay.name"
         ));
         // Setting
         KeyMapping upFOVBind;
-        upFOVBind = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+        upFOVBind = KeyMappingHelper.register(CommonUtils.getKeyMapping(
                 "camoverlay.binds.fov.up",
-                InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_UP, // The keycode of the key
                 "camoverlay.name"
         ));
         KeyMapping downFOVBind;
-        downFOVBind = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+        downFOVBind = KeyMappingHelper.register(CommonUtils.getKeyMapping(
                 "camoverlay.binds.fov.down",
-                InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_DOWN, // The keycode of the key
                 "camoverlay.name"
         ));
         KeyMapping rightRotateBind;
-        rightRotateBind = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+        rightRotateBind = KeyMappingHelper.register(CommonUtils.getKeyMapping(
                 "camoverlay.binds.rotate.right",
-                InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_RIGHT, // The keycode of the key
                 "camoverlay.name"
         ));
         KeyMapping leftRotateBind;
-        leftRotateBind = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+        leftRotateBind = KeyMappingHelper.register(CommonUtils.getKeyMapping(
                 "camoverlay.binds.rotate.left",
-                InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_LEFT, // The keycode of the key
                 "camoverlay.name"
         ));
         KeyMapping resetRotateBind;
-        resetRotateBind = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+        resetRotateBind = KeyMappingHelper.register(CommonUtils.getKeyMapping(
                 "camoverlay.binds.rotate.reset",
-                InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_RIGHT_SHIFT, // The keycode of the key
                 "camoverlay.name"
         ));
         // Menu
         KeyMapping menuBind;
-        menuBind = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+        menuBind = KeyMappingHelper.register(CommonUtils.getKeyMapping(
                 "camoverlay.binds.open",
-                InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_DELETE, // The keycode of the key
                 "camoverlay.name"
         ));
@@ -232,7 +225,7 @@ public class CamOverlay implements ClientModInitializer {
                 }
             }
             while (menuBind.consumeClick()) {
-                MINECRAFT.setScreen(ConfigScreen.build(MINECRAFT.screen));
+                MINECRAFT.setScreenAndShow(ConfigScreen.build(MINECRAFT.gui.screen()));
             }
         });
     }

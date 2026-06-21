@@ -1,6 +1,6 @@
 package ru.kelcuprum.camoverlay.overlays.helpers;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.camoverlay.CamOverlay;
 
@@ -10,7 +10,7 @@ public class GridCustomOverlay extends AbstractHelper {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int width, int height) {
+    public void render(GuiGraphicsExtractor guiGraphics, int width, int height) {
         int x = width / CamOverlay.config.getNumber("GRID_NUMBER", 2).intValue();
         int y = height / CamOverlay.config.getNumber("GRID_NUMBER", 2).intValue();
         int steps = CamOverlay.config.getNumber("GRID_NUMBER", 2).intValue() - 1;

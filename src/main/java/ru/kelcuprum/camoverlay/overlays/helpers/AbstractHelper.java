@@ -1,7 +1,7 @@
 package ru.kelcuprum.camoverlay.overlays.helpers;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
 
@@ -15,6 +15,6 @@ public abstract class AbstractHelper {
         this.id = id;
     }
 
-    public void render(GuiGraphics guiGraphics, int width, int height){
+    public void render(GuiGraphicsExtractor guiGraphics, int width, int height){
     }
 }

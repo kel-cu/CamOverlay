@@ -31,11 +31,9 @@
 
   "depends": {
     "fabricloader": "*",
-    "fabric": "*",
     "minecraft": ">1.20.6",
     "alinlib": "*"
   },
-  "accessWidener": "camoverlay.accesswidener",
   "custom": {
     "modmenu": {
       "links": {

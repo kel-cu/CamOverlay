@@ -1,6 +1,6 @@
 package ru.kelcuprum.camoverlay.overlays.helpers;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 
 public class Grid4x4Overlay extends AbstractHelper {
@@ -9,7 +9,7 @@ public class Grid4x4Overlay extends AbstractHelper {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int width, int height) {
+    public void render(GuiGraphicsExtractor guiGraphics, int width, int height) {
         int x = width / 4;
         int y = height / 4;
         // x

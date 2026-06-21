@@ -16,8 +16,8 @@ public class MouseMixin {
 
     @Inject(method = "onScroll", at = @At(value = "HEAD"), cancellable = true)
     private void swapPoint(long windowPointer, double xOffset, double yOffset, CallbackInfo ci){
-        if (windowPointer == Minecraft.getInstance().getWindow().getWindow() && CamOverlay.config.getBoolean("ENABLE", false) && CamOverlay.config.getBoolean("ENABLE.SCROLL_FOV", true)) {
-            if(minecraft.screen != null || minecraft.getOverlay() != null) return;
+        if (windowPointer == Minecraft.getInstance().getWindow().handle() && CamOverlay.config.getBoolean("ENABLE", false) && CamOverlay.config.getBoolean("ENABLE.SCROLL_FOV", true)) {
+            if(minecraft.gui.screen() != null || minecraft.gui.overlay() != null) return;
             CamOverlay.changeFov(yOffset, true);
             ci.cancel();
         }

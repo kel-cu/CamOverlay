@@ -1,10 +1,10 @@
 package ru.kelcuprum.camoverlay.overlays;
 
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.camoverlay.CamOverlay;
 
@@ -16,32 +16,32 @@ public class CarCamOverlay extends AbstractOverlay {
     }
 
     @Override
-    public void renderRound(GuiGraphics guiGraphics, int width, int height) {
+    public void renderRound(GuiGraphicsExtractor guiGraphics, int width, int height) {
         if(CamOverlay.config.getBoolean("RECORD_MODE", true)) {
-            guiGraphics.fill(RenderType.guiOverlay(), 0, 0, guiGraphics.guiWidth(), 20, 0xFF000000);
-            guiGraphics.fill(RenderType.guiOverlay(), 0, guiGraphics.guiHeight(), guiGraphics.guiWidth(), guiGraphics.guiHeight() - 20, 0xFF000000);
+            guiGraphics.fill(0, 0, guiGraphics.guiWidth(), 20, 0xFF000000);
+            guiGraphics.fill(0, guiGraphics.guiHeight(), guiGraphics.guiWidth(), guiGraphics.guiHeight() - 20, 0xFF000000);
         }
     }
     public static File file = AlinLib.MINECRAFT.gameDirectory.toPath().resolve("screenshots").toFile();
     @Override
-    public void renderText(GuiGraphics guiGraphics, int width, int height) {
+    public void renderText(GuiGraphicsExtractor guiGraphics, int width, int height) {
         int i = 10;
         int yBottom = height - i - (minecraft.font.lineHeight / 2);
         int camK = 19 / 10;
         int camH = 19 / camK;
         int camW = 21 / camK;
-        guiGraphics.blit(RenderType::guiTexturedOverlay, ResourceLocation.fromNamespaceAndPath("camoverlay", String.format("textures/overlays/carcam/%s.png", CamOverlay.config.getBoolean("RECORD_MODE", true) ? "rec" : "photo")), 5, 5, 0, 0, camW, camH, camW, camH);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, Identifier.fromNamespaceAndPath("camoverlay", String.format("textures/overlays/carcam/%s.png", CamOverlay.config.getBoolean("RECORD_MODE", true) ? "rec" : "photo")), 5, 5, 0, 0, camW, camH, camW, camH);
         String text = "00:00:00";
         if(!CamOverlay.config.getBoolean("RECORD_MODE", true) && file.exists() && file.isDirectory()){
             text = String.format("%05d", file.listFiles().length);
         }
         int yTop = i - (minecraft.font.lineHeight / 2);
-        guiGraphics.drawString(minecraft.font, text, width - 10 - minecraft.font.width(text), yTop, -1);
-        if(CamOverlay.config.getBoolean("RECORD_MODE", true)) guiGraphics.drawCenteredString(minecraft.font, CamOverlay.localization.getParsedText("{camoverlay.overlay.time}"), width / 2, yBottom, -1);
+        guiGraphics.text(minecraft.font, text, width - 10 - minecraft.font.width(text), yTop, -1);
+        if(CamOverlay.config.getBoolean("RECORD_MODE", true)) guiGraphics.centeredText(minecraft.font, CamOverlay.localization.getParsedText("{camoverlay.overlay.time}"), width / 2, yBottom, -1);
     }
 
     @Override
-    public void renderStatus(GuiGraphics guiGraphics, int width, int height) {
+    public void renderStatus(GuiGraphicsExtractor guiGraphics, int width, int height) {
         double state = ((minecraft.player.getFoodData().getFoodLevel() + minecraft.player.getHealth()) / 2) / 20;
         int y = height - 20 + 5;
         int batteryH = 10;
